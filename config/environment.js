@@ -40,7 +40,6 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/games/swole-baby/';
   }
 
   return ENV;
