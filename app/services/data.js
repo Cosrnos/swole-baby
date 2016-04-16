@@ -37,10 +37,24 @@ export default Ember.Object.extend({
       throw new Error(`Cannot find store ${storeName} as it has not been registered`);
     }
     return store;
-  }
+  },
 }).create({});
 
 var StoreModel = Ember.ArrayProxy.extend({
   _id_seed: 0,
   storeName: null,
+  filterObj: function (filter) {
+    var array = [].concat(this.get('content'));
+    Object.keys(filter).forEach(function (key) {
+      array = array.filterBy(key, filter[key]);
+    })
+    return array;
+  },
+  getRandom: function (filter) {
+    filter = filter || {};
+    var pool = this.filterObj(filter);
+    var rng = Math.floor(Math.random() * pool.length);
+
+    return pool.objectAt(rng);
+  }
 });

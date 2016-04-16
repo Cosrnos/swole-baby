@@ -2,6 +2,8 @@ import Model from './model';
 import Ember from 'ember';
 
 export default Model.extend({
+  modelType: 'baby',
+  
   name: null,
   gender: 'male',
   isMale: Ember.computed.equal('gender', 'male'),
@@ -60,6 +62,22 @@ export default Model.extend({
     }
   }),
 
+  end_exp: Ember.computed('end', function () {
+    const end = this.get('end');
+
+    if (end < 3) {
+      return 'weak willed';
+    } else if (end < 6) {
+      return 'a no good quitter';
+    } else if (end < 9) {
+      return 'tries pretty hard';
+    } else if (end < 12) {
+      return `doesn't give up ever`;
+    } else {
+      return 'made of metal';
+    }
+  }),
+
   cha_exp: Ember.computed('cha', function () {
     const cha = this.get('cha');
 
@@ -81,25 +99,58 @@ export default Model.extend({
       return 'can negotiate peace treaties or something dude';
     }
   }),
-  int_exp: Ember.computed('int', function () {
-    const int = this.get('int');
 
-    if (int < 5) {
+  sel_exp: Ember.computed('sel', function () {
+    const sel = this.get('sel');
+
+    if (sel < 3) {
+      return 'is just really pathetic';
+    } else if (sel < 6) {
+      return 'kinda happy';
+    } else if (sel < 9) {
+      return 'pretty confident';
+    } else if (sel < 12) {
+      return `has no ego`;
+    } else {
+      return 'has reached nirvana';
+    }
+  }),
+
+  mag_exp: Ember.computed('mag', function () {
+    const mag = this.get('mag');
+    
+    if (mag < 5) {
       return `so fucking dumb`;
-    } else if (int < 10) {
+    } else if (mag < 10) {
       return `doesn't know shit`;
-    } else if (int < 15) {
+    } else if (mag < 15) {
       return `not that smart`;
-    } else if (int < 20) {
+    } else if (mag < 20) {
       return 'knows enough';
-    } else if (int < 25) {
+    } else if (mag < 25) {
       return 'a learned baby';
-    } else if (int < 30) {
+    } else if (mag < 30) {
       return 'a scholar or something';
-    } else if (int < 35) {
+    } else if (mag < 35) {
       return 'knows more than me';
     } else {
       return 'is best friends with neil de-fuckin-grasse tyson';
     }
-  })
+  }),
+
+  wis_exp: Ember.computed('wis', function () {
+    const wis = this.get('wis');
+
+    if (wis < 3) {
+      return 'a new soul';
+    } else if (wis < 6) {
+      return 'has a limited world view';
+    } else if (wis < 9) {
+      return 'has common sense';
+    } else if (wis < 12) {
+      return `has seen some shit`;
+    } else {
+      return 'is a buddhist monk';
+    }
+  }),
 });

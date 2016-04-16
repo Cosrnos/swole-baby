@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
     pick_diet: function (diet) {
-      var baby = this.get('model');
+      var baby = this.get('controller.model');
 
       switch (diet) {
         case 'vegan':
