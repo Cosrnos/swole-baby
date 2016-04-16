@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import Player from '../models/player';
+import Data from '../services/data';
 
 export default Ember.Route.extend({
   model: function () {
-    return Player.create({ showInfo: true });
+    return Data.get('player');
   },
   redirect: function () {
     this.transitionTo('welcome');

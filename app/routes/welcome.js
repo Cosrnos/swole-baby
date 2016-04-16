@@ -1,11 +1,9 @@
 import Ember from 'ember';
-import Baby from '../models/baby';
+import Data from '../services/data';
 
 export default Ember.Route.extend({
   model: function () {
-    return Baby.create({
-      name: `yo' baby`
-    });
+    return Data.get('baby')
   },
 
   redirect: function () {

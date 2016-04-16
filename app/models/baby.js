@@ -1,12 +1,12 @@
 import Model from './model';
 import Ember from 'ember';
+import BabyData from '../data/baby';
 
 export default Model.extend({
   modelType: 'baby',
-  
+
+  // Properties
   name: null,
-  gender: 'male',
-  isMale: Ember.computed.equal('gender', 'male'),
 
   str: 1,
   end: 1,
@@ -14,7 +14,21 @@ export default Model.extend({
   sel: 1,
   mag: 1,
   wis: 1,
+  gender: 'male',
 
+  // Computed Macros
+  isMale: Ember.computed.equal('gender', 'male'),
+
+  // Hooks
+  init: function () {
+    if (!this.get('name')) {
+      this.setProperties(BabyData.getRandomProfile());
+    }
+
+    this._super();
+  },
+
+  // Computed Properties
   s_he: Ember.computed('isMale', function () {
     if (this.get('isMale')) {
       return 'he';

@@ -3,6 +3,9 @@ import Ember from 'ember';
 export default Ember.Object.extend({
   stores: Ember.Object.create({}),
 
+  player: null,
+  baby: Ember.computed.alias('player.baby'),
+
   /**
    * Creates a data store and adds it to the service
    * @param storeName
