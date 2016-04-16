@@ -1,0 +1,37 @@
+<h2>IT'S TIME TO MEET YOUR BABY</h2>
+<p>Alright bro, your baby's name is <strong>{{model.name}}</strong>. {{model.s_he}}'s <strong>{{model.str_exp}}</strong>
+    and <strong>{{model.cha_exp}}</strong>, not to mention <strong>{{model.int_exp}}</strong> but after you're through
+    with {{model.him_her}}, {{model.s_he}}'s gonna be <strong>SO SWOLE!!!!</strong></p>
+<p>First things first buddy, what kind of diet are you gonna put <strong>{{model.name}}</strong> on?</p>
+<br/>
+<br/>
+<div class="row">
+    <div class="col-xs-8">
+        <strong>Vegan</strong> - a vegan diet's gonna cause your baby to get all sorts of spooky powers and
+        shit. {{model.s_he}} is probably gonna talk about that shit all the time but it's gonna be hella worth it.
+    </div>
+    <div class="col-xs-4">
+        <button {{action 'pick_diet' 'vegan'}} class="btn btn-success btn-lg btn-block">Almond Milk</button>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-xs-8">
+        <strong>Paleo</strong> - Look bro. Babies didn't need all this fancy formula shit in the cave days and if it
+        worked for them while they were fighting dinosaurs then it sure as shit is gonna work for this baby!
+    </div>
+    <div class="col-xs-4">
+        <button {{action 'pick_diet' 'paleo'}} class="btn btn-danger btn-lg btn-block">Breast Milk</button>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-xs-8">
+        <strong>Atkins</strong> - Two Words: Muscle Milk. It's got "milk" right in the title, so why should I listen to
+        some punk ass doctor when she tells me it's "not healthy" or "going to slowly poison the child." THAT BABY NEEDS
+        TO BE SWOLE AND THIS WILL DO IT
+    </div>
+    <div class="col-xs-4">
+        <button {{action 'pick_diet' 'atkins'}} class="btn btn-warning btn-lg btn-block">Muscle Milk</button>
+    </div>
+</div>

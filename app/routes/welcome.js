@@ -6,5 +6,9 @@ export default Ember.Route.extend({
     return Baby.create({
       name: `yo' baby`
     });
+  },
+
+  redirect: function () {
+    return this.transitionTo('welcome.intro');
   }
 });
