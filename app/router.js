@@ -12,6 +12,7 @@ Router.map(function () {
     this.route('activity');
     this.route('perk');
   });
+  this.route('battle');
 });
 
 export default Router;

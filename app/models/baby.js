@@ -132,7 +132,7 @@ export default Model.extend({
 
   mag_exp: Ember.computed('mag', function () {
     const mag = this.get('mag');
-    
+
     if (mag < 5) {
       return `so fucking dumb`;
     } else if (mag < 10) {
@@ -167,4 +167,112 @@ export default Model.extend({
       return 'is a buddhist monk';
     }
   }),
-});
+
+
+  //Battle Stuff
+  swoleness: 0,
+
+  magicAttackBase: Ember.computed('mag', function() {
+    return (this.get('mag'));
+  }),
+  magicAttackFatigue: 0,
+  magicAttackFatigueRate: Ember.computed('magicAttackBase', function() {
+    return 0.05;
+  }),
+  magicAttackRecoveryRate: Ember.computed('wis', function() {
+    return 0.01;
+  }),
+
+  charismaAttackBase: Ember.computed('cha', function() {
+    return (this.get('cha'));
+  }),
+  charismaAttackFatigue: 0,
+  charismaAttackFatigueRate: Ember.computed('charismaAttackBase', function() {
+    return 0.05;
+  }),
+  charismaAttackRecoveryRate: Ember.computed('sel', function() {
+    return 0.01;
+  }),
+
+  muscleAttackBase:  Ember.computed('str', function() {
+    return (this.get('str')) * 0.05;
+  }),
+  muscleAttackFatigue: 0,
+  muscleAttackFatigueRate: Ember.computed('muscleAttackBase', function() {
+    return 0.05;
+  }),
+  muscleAttackRecoveryRate: Ember.computed('end', function() {
+    return 0.01;
+  }),
+
+  battleTick: function(){
+    var magicAttackFatigue = this.get('magicAttackFatigue');
+    var magicAttackRecoveryRate = this.get('magicAttackRecoveryRate');
+
+    var charismaAttackFatigue = this.get('charismaAttackFatigue');
+    var charismaAttackRecoveryRate = this.get('charismaAttackRecoveryRate');
+
+    var muscleAttackFatigue = this.get('muscleAttackFatigue');
+    var muscleAttackRecoveryRate = this.get('muscleAttackRecoveryRate');
+
+    var newMuscleAttackFatigue = muscleAttackFatigue - muscleAttackRecoveryRate;
+    newMuscleAttackFatigue = newMuscleAttackFatigue >= 0 ? newMuscleAttackFatigue : 0;
+
+    var newMagicAttackFatigue = magicAttackFatigue - magicAttackRecoveryRate;
+    newMagicAttackFatigue = newMagicAttackFatigue >= 0 ? newMagicAttackFatigue : 0;
+
+    var newCharismaAttackFatigue = charismaAttackFatigue - charismaAttackRecoveryRate;
+    newCharismaAttackFatigue = newCharismaAttackFatigue >= 0 ? newCharismaAttackFatigue : 0;
+
+    this.set('magicAttackFatigue', newMagicAttackFatigue);
+    this.set('charismaAttackFatigue', newCharismaAttackFatigue);
+    this.set('muscleAttackFatigue', newMuscleAttackFatigue);
+  },
+
+  muscleAttack: function(opponent) {
+    var muscleAttackBase = this.get('muscleAttackBase');
+    var muscleAttackFatigue = this.get('muscleAttackFatigue');
+    var muscleAttackFatigueRate = this.get('muscleAttackFatigueRate');
+
+    var attack = muscleAttackBase - (muscleAttackBase * muscleAttackFatigue);
+    attack = attack >= 0 ? attack : 0;
+
+    var newMuscleAttackFatigue = muscleAttackFatigue + muscleAttackFatigueRate;
+    newMuscleAttackFatigue = newMuscleAttackFatigue <= 1 ? newMuscleAttackFatigue : 1;
+
+    this.set('muscleAttackFatigue', newMuscleAttackFatigue);
+
+    this.incrementProperty('swoleness', attack);
+  },
+
+  magicAttack: function(opponent) {
+    var magicAttackBase = this.get('magicAttackBase');
+    var magicAttackFatigue = this.get('magicAttackFatigue');
+    var magicAttackFatigueRate = this.get('magicAttackFatigueRate');
+
+    var attack = magicAttackBase - (magicAttackBase * magicAttackFatigue);
+    attack = attack >= 0 ? attack : 0;
+
+    var newMagicAttackFatigue = magicAttackFatigue + magicAttackFatigueRate;
+    newMagicAttackFatigue = newMagicAttackFatigue <= 1 ? newMagicAttackFatigue : 1;
+
+    this.set('magicAttackFatigue', newMagicAttackFatigue);
+
+    this.incrementProperty('swoleness', attack);
+  },
+
+  charismaAttack: function(opponent) {
+    var charismaAttackBase = this.get('charismaAttackBase');
+    var charismaAttackFatigue = this.get('charismaAttackFatigue');
+    var charismaAttackFatigueRate = this.get('charismaAttackFatigueRate');
+
+    var attack = charismaAttackBase - (charismaAttackBase * charismaAttackFatigue);
+    attack = attack >= 0 ? attack : 0;
+
+    var newCharismaAttackFatigue = charismaAttackFatigue + charismaAttackFatigueRate;
+    newCharismaAttackFatigue = newCharismaAttackFatigue <= 1 ? newCharismaAttackFatigue : 1;
+
+    this.set('charismaAttackFatigue', newCharismaAttackFatigue);
+
+    this.incrementProperty('swoleness', attack);
+}});
