@@ -1,5 +1,5 @@
-import initGod from './perks/god';
+import initPerks from './perks/init';
 
 export default function () {
-  initGod();
+  initPerks();
 }

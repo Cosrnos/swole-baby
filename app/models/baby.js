@@ -1,19 +1,22 @@
 import Model from './model';
 import Ember from 'ember';
 import BabyData from '../data/baby';
+import PerkData from '../data/perk';
+import Perkable from '../mixins/perkable';
 
-export default Model.extend({
+export default Model.extend(Perkable, {
   modelType: 'baby',
+  targetType: PerkData.Targets.Baby,
 
-  // Properties
+// Properties
   name: null,
 
-  str: 1,
-  end: 1,
-  cha: 1,
-  sel: 1,
-  mag: 1,
-  wis: 1,
+  str: 2,
+  end: 2,
+  cha: 2,
+  sel: 2,
+  mag: 2,
+  wis: 2,
   gender: 'male',
 
   // Computed Macros
@@ -26,9 +29,10 @@ export default Model.extend({
     }
 
     this._super();
-  },
+  }
+  ,
 
-  // Computed Properties
+// Computed Properties
   s_he: Ember.computed('isMale', function () {
     if (this.get('isMale')) {
       return 'he';

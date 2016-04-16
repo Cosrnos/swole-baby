@@ -53,11 +53,28 @@ var StoreModel = Ember.ArrayProxy.extend({
     })
     return array;
   },
-  getRandom: function (filter) {
+  getRandom: function (filter, amount) {
     filter = filter || {};
-    var pool = this.filterObj(filter);
-    var rng = Math.floor(Math.random() * pool.length);
+    amount = amount || 1;
 
-    return pool.objectAt(rng);
+    var pool = this.filterObj(filter);
+
+    if (amount > pool.length) {
+      return pool;
+    }
+    var indicies = [];
+
+    while (indicies.length < amount) {
+      let i = Math.floor(Math.random() * pool.length);
+      if (!indicies.contains(i)) {
+        indicies.addObject(i);
+      }
+    }
+
+    if (indicies.length === 1) {
+      return pool.objectAt(indicies[0]);
+    }
+
+    return pool.objectsAt(indicies)
   }
 });

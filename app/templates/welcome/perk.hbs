@@ -1,1 +1,27 @@
-You got the {{perk.name}} Perk!
+<h2>Baby got... back?</h2>
+<p>{{player.baby.name}} is already looking better. Sort of. To tell you the truth bro all babies look the same to me.
+    Whatever.</p>
+<p>It's time to figure out what the heck your baby is good at. Improv? Computers? Geo-political conflict
+    resolution? Babies are usually pretty bad at all these things but if your baby wants to get
+    swole, {{player.baby.s_he}}'s gonna need to sort {{player.baby.his_her}} shit out.</p>
+<p>Look, I got a friend who can teach your baby one of these skills and he'll do it for free, but after that it's gonna
+    cost ya. Don't ask how he can teach a baby these things, it's definitelly not illegal. Or painful. You know what
+    just pick a perk.</p>
+<br/><br/>
+{{#each model as |perk|}}
+    <div class="col-xs-6 perk-card">
+        <h3>{{perk.name}}</h3>
+        <p><em>"{{perk.description}}"</em></p>
+        {{#if perk.statMod}}
+            <ul>
+                {{#each perk.statModDisplays as |statmod|}}
+                    <li>{{statmod}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+        <button class="btn btn-primary btn-block" {{action 'select_perk' perk}}>Pick "{{perk.name}}"</button>
+    </div>
+    {{#if perk.clearfix}}
+        <div class="clearfix "></div>
+    {{/if}}
+{{/each}}
