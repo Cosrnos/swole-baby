@@ -4,8 +4,12 @@ import Schedule from '../services/tourney-schedule';
 export default Ember.Component.extend({
   onTourneySelect: null,
 
-  availableTourneys: Schedule.get('availableTourneys'),
-  nextAvailableTourney: Schedule.get('nextAvailableTourney'),
+  availableTourneys: Ember.computed('', function () {
+    return Schedule.get('availableTourneys');
+  }),
+  nextAvailableTourney: Ember.computed('', function () {
+    return Schedule.get('nextAvailableTourney');
+  }),
 
   actions: {
     tourneySelect: function (tourney) {

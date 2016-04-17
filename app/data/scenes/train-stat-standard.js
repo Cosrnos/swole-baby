@@ -2,7 +2,7 @@ import SceneModel from '../../models/scene';
 
 function generateStatTrain(stat) {
   var mod = {};
-  mod[stat] = Math.floor(Math.random() * 3) + 1;
+  mod[stat] = 2;
 
   return {
     componentName: 'scene-next',
@@ -21,10 +21,10 @@ function generateStatTrain(stat) {
 
 export default function () {
   // Generic Stat Training
-  SceneModel.create(generateStatTrain('str'));
-  SceneModel.create(generateStatTrain('end'));
-  SceneModel.create(generateStatTrain('cha'));
-  SceneModel.create(generateStatTrain('sel'));
-  SceneModel.create(generateStatTrain('mag'));
-  SceneModel.create(generateStatTrain('wis'));
+  SceneModel.extend(generateStatTrain('str')).create({});
+  SceneModel.extend(generateStatTrain('end')).create({});
+  SceneModel.extend(generateStatTrain('cha')).create({});
+  SceneModel.extend(generateStatTrain('sel')).create({});
+  SceneModel.extend(generateStatTrain('mag')).create({});
+  SceneModel.extend(generateStatTrain('wis')).create({});
 }
