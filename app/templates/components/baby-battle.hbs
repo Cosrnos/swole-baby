@@ -3,12 +3,25 @@
         <div style="text-align: center">
             {{#unless battleStarted}}
                 {{#unless battleFinished}}
-                    <button class="btn btn-success" {{action 'startBattle'}}>Start Battle!</button>
+                    {{#if battleCountdownStarted}}
+                        <h2>Competition begins in: </h2>
+
+                        <div style="position: relative;" class="progress fatigue-bar">
+                            <div style="position: absolute; width:100%" class="text-center">{{battleStartCountdown}}</div>
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                                 aria-valuemin="0" aria-valuemax="100" style={{if battleCountdownPercentage battleCountdownPercentage 'width: 100%'}}>
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                    {{else}}
+                        <button class="btn btn-success" {{action 'startBattle'}}>Start Battle!</button>
+                    {{/if}}
+
                 {{else}}
                     {{#if wonBattle}}
                         Yo baby was swollest today, dawg.
                     {{else}}
-                        Yo baby was didn't have it today, dawgstar. Sorry.
+                        Yo baby didn't have it today, dawgstar. Sorry.
                     {{/if}}
                     <br>
                     {{#if onLeaveBattle}}

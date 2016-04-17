@@ -1,0 +1,39 @@
+<style>
+    .circle-countdown {
+        position: relative;
+        float: left;
+    }
+
+    .circle-countdown .center-number {
+        text-align:center;
+        position: absolute;
+        width: 100%;
+
+        font-weight: 500;
+        font-size: 30px;
+
+        top: 48%;
+        transform: translateY(-50%);
+    }
+
+    svg {
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    .circle_animation {
+        stroke-dasharray: 185; /* this value is the pixel circumference of the circle */
+        stroke-dashoffset: 185;
+        transition: all 1s linear;
+    }
+</style>
+
+<div class="circle-countdown html">
+    <span class="center-number">0</span>
+    <svg width="{{widthHeight}}" height="{{widthHeight}}" xmlns="http://www.w3.org/2000/svg">
+        <g>
+            <title>Layer 1</title>
+            <circle id="circle" class="circle_animation" r="{{radius}}" cy="{{circlePos.y}}" cx="{{circlePos.x}}" stroke-width="{{stroke}}" stroke="{{color}}" fill="none"/>
+        </g>
+    </svg>
+</div>

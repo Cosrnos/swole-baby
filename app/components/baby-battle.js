@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 
   battleStarted: false,
   battleFinished: false,
+  battleCountdownStarted: false,
   wonBattle: null,
   timeLeft: 25000, //25 seconds
 
@@ -53,7 +54,7 @@ export default Ember.Component.extend({
     var attack = _.sample(attacks);
 
     attack.call(opponent);
-    Ember.run.throttle(this.jiggleOpponentSwoleness, 300);
+    Ember.run.throttle(this.jiggleOpponentSwoleness, 200);
 
   },
 
@@ -107,6 +108,24 @@ export default Ember.Component.extend({
     });
   },
 
+  _actuallyForRealBeginTheBattle: function(){
+    var timer = setInterval(() => {
+      this.battleTick();
+    }, 100);
+
+    //Timer to simulate opponent clicks.
+    if (this.get('opponent')) {
+      var opponentTimer = setInterval(() => {
+        this.opponentClick();
+      }, 250);
+      this.set('opponentTimer', opponentTimer);
+    }
+
+    this.set('timer', timer);
+    this.set('timeLeft', this.get('timeLimit') || 25000)
+    this.set('battleStarted', true);
+  },
+
   actions: {
     battleClick: function (type) {
       if (this.get('battleStarted')) {
@@ -124,22 +143,26 @@ export default Ember.Component.extend({
       Ember.run.throttle(this.jiggleSwoleness, 200);
     },
 
+    //Start the countdown timer to begin the battle.
     startBattle: function () {
-      var timer = setInterval(() => {
-        this.battleTick();
-      }, 100);
+      //Countdown to the battle:
+      this.set('battleCountdownStarted',true);
 
-      //Timer to simulate opponent clicks.
-      if (this.get('opponent')) {
-        var opponentTimer = setInterval(() => {
-          this.opponentClick();
-        }, 250);
-        this.set('opponentTimer', opponentTimer);
-      }
+      var countDown = 2000;
+      var battleCountDownTimer = setInterval(() => {
+        countDown -= 20;
+        this.set('battleStartCountdown', (countDown/1000).toFixed(2));
 
-      this.set('timer', timer);
-      this.set('timeLeft', this.get('timeLimit') || 25000)
-      this.set('battleStarted', true);
-    }
+        var battleCountdownPercentage = Math.ceil( ( (countDown / 2000)) * 100);
+        this.set('battleCountdownPercentage', `width: ${battleCountdownPercentage}%`);
+
+        if(countDown <= 0){
+          //Actually Begin the battle
+          this._actuallyForRealBeginTheBattle();
+          clearInterval(battleCountDownTimer);
+        }
+
+      }, 20);
+    },
   }
 });

@@ -254,7 +254,9 @@ export default Model.extend(Perkable, {
     return 0.05;
   }),
   magicAttackRecoveryRate: Ember.computed('wis', function () {
-    return 0.01;
+    var wis = this.get('wis');
+    var multiplier = (1 + wis / 100);
+    return 0.01 * multiplier;
   }),
 
   magicAttackWords: ['shazam', 'abra cadabra', 'firebolt', 'pew pew pew'],
@@ -267,7 +269,10 @@ export default Model.extend(Perkable, {
     return 0.05;
   }),
   charismaAttackRecoveryRate: Ember.computed('sel', function () {
-    return 0.01;
+    var sel = this.get('sel');
+    var multiplier = 1 + (sel / 100);
+
+    return 0.01 * multiplier;
   }),
   charismaAttackWords: ['wink', 'smile', 'joke', 'single-eyebrow-raise'],
 
@@ -279,7 +284,10 @@ export default Model.extend(Perkable, {
     return 0.05;
   }),
   muscleAttackRecoveryRate: Ember.computed('end', function () {
-    return 0.01;
+    var end = this.get('end');
+    var multiplier = 1 + (end / 100);
+
+    return 0.01 * multiplier;
   }),
   muscleAttackWords: ['flex', 'stretch', 'pecks', 'swole'],
 

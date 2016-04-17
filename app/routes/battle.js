@@ -15,7 +15,7 @@ export default Ember.Route.extend({
       name: `Good Baby`,
       isEnemy: false,
       str: 10,
-      end: 5
+      end: 5,
     });
 
     controller.set('opponent', opponent);

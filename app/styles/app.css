@@ -25,6 +25,13 @@
     margin-bottom: 2px;
 }
 
+.fatigue-bar .progress-bar{
+    -webkit-transition: width .1s linear;
+    -o-transition: width .1s linear;
+    transition: width 0.1s linear;
+}
+
+
 .attack-btn {
     font-size: 14pt;
     font-weight: bold;
