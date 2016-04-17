@@ -3,9 +3,6 @@ import Data from '../services/data';
 
 export default Ember.Route.extend({
   model: function () {
-    return Data.get('player');
-  },
-  redirect: function () {
-    this.transitionTo('welcome');
+    return Data.get('player.baby');
   }
 });

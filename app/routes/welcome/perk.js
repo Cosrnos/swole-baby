@@ -8,9 +8,7 @@ export default Ember.Route.extend(ClearStatsOnWillTransition, {
     return Data.storeFor('perk').getRandom({
       rank: PerkData.Rank.F
     }, 4).map(function (model, index) {
-      if (index % 2 === 1) {
-        model.set('clearfix', true);
-      }
+      model.set('clearfix', (index % 2 === 1));
       return model;
     });
   },

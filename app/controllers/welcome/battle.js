@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
 
   init: function () {
     this.set('step', 1);
+    this.set('done', false);
   },
 
   actions: {

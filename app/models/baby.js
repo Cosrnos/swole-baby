@@ -49,6 +49,7 @@ export default Model.extend(Perkable, {
 
   // Computed Macros
   isMale: Ember.computed.equal('gender', 'male'),
+  isChampion: Ember.computed.gte('rank', BabyData.Rank.CHAMPION),
 
   // Hooks
   init: function () {
