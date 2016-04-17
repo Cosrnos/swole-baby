@@ -1,0 +1,34 @@
+<h3>Tournaments</h3>
+<p>You think your baby has what it TAKES? You should shut up and let your BABY do your talking for you bro. I mean, you
+    know, if it <em>could</em> talk</p>
+{{#if availableTourneys}}
+    <div class="row">
+        <div class="col-xs-1">Rank</div>
+        <div class="col-xs-4">Name</div>
+        <div class="col-xs-2">Prize</div>
+        <div class="col-xs-4"></div>
+    </div>
+    {{#each availableTourneys as |tourney|}}
+        <div class="row">
+            <div class="col-xs-1">
+                <strong>{{tourney.rankName}}</strong>
+            </div>
+            <div class="col-xs-4">
+                <strong>{{tourney.name}}</strong>
+            </div>
+            <div class="col-xs-2">
+                <strong>{{tourney.prize}}</strong>
+            </div>
+            <div class="col-xs-5">
+                <button {{action 'tourneySelect' tourney}} class="btn btn-block btn-lg btn-warning">Register</button>
+            </div>
+        </div>
+    {{/each}}
+{{else}}
+    <div class="text-center">
+        <h3>No Tournaments. Come back later bro</h3>
+        {{#if nextAvailableTourney}}
+            <p>The next tournament is in {{nextAvailableTourney.availableIn}} Weeks.</p>
+        {{/if}}
+    </div>
+{{/if}}

@@ -3,7 +3,7 @@ import SceneBase from './-scene-base';
 
 export default SceneBase.extend({
   actions: {
-    onClickNext: function () {
+    finish: function () {
       this.sendAction('onFinish');
     }
   }

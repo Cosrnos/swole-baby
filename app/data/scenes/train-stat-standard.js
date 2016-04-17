@@ -11,10 +11,10 @@ function generateStatTrain(stat) {
     stat: stat,
     statMod: mod,
     text: `Your baby worked all week training its ${stat}`,
-    setup: function () {
+    start: function () {
       this.set('stat', stat);
     },
-    teardown: function () {
+    end: function () {
     }
   };
 }

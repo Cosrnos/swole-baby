@@ -2,6 +2,17 @@
     {{partial 'weekStandard'}}
 {{/if}}
 
+{{#if isTourneyScreen}}
+    {{partial 'tourneySelect'}}
+{{/if}}
+
 {{#if isScenarioScreen}}
-    {{component scenario.componentName scene=scenario onFinish=scenarioFinishHandler}}
+    {{component scenarioComponentName scene=scenario onFinish=scenarioFinishHandler onSceneTransition='handleSceneTransition'}}
+{{/if}}
+
+{{#if isTourneyListScreen}}
+    {{tourney-list onTourneySelect='handleTourneySelect'}}
+    <button {{action 'changeScreen' 'standard'}} class="btn btn-primary">
+        <span class="glyphicon glyphicon-menu-left"></span>&nbsp;&nbsp;Back
+    </button>
 {{/if}}

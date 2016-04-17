@@ -1,12 +1,32 @@
 <h3>Week {{player.week}}</h3>
 <p>You have until Week 12 To Do the thing.</p>
 <p></p><br/><br/>
-<div class="col-xs-3"></div>
-<div class="col-xs-6">
-    <button {{action 'enterStandardScenario' 'train' 'str'}} class="btn btn-block btn-danger">Train STR</button>
-    <button {{action 'enterStandardScenario' 'train' 'cha'}} class="btn btn-block btn-warning">Train CHA</button>
-    <button {{action 'enterStandardScenario' 'train' 'mag'}} class="btn btn-block btn-success">Train MAG</button>
-    <button {{action 'enterStandardScenario' 'shop'}} class="btn btn-block btn-primary">Visit Shops</button>
-    <button {{action 'enterStandardScenario' 'rest'}} class="btn btn-block">Rest</button>
+<div class="col-xs-1"></div>
+<div class="col-xs-5">
+    <h3 class="border-bottom pad-top-none">Training</h3>
+    <button {{action 'enterStandardScenario' 'train' 'str'}} class="btn btn-block btn-danger">
+        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;STR
+    </button>
+    <button {{action 'enterStandardScenario' 'train' 'cha'}} class="btn btn-block btn-warning">
+        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;CHA
+    </button>
+    <button {{action 'enterStandardScenario' 'train' 'mag'}} class="btn btn-block btn-success">
+        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;MAG
+    </button>
+    <button {{action 'enterStandardScenario' 'rest'}} class="btn btn-block">
+        Rest
+    </button>
 </div>
-<div class="col-xs-3"></div>
+<div class="col-xs-5">
+    <h3 class="border-bottom pad-top-none">Special</h3>
+    <button {{action 'changeScreen' 'stats'}} class="btn btn-block">
+        <span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Stats
+    </button>
+    <button {{action 'changeScreen' 'shops'}} class="btn btn-block">
+        <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Shops
+    </button>
+    <button {{action 'changeScreen' 'tourney-list'}} class="btn btn-block btn-warning">
+        <span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;Tournaments
+    </button>
+</div>
+<div class="col-xs-1"></div>

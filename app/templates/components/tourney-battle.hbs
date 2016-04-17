@@ -1,0 +1,16 @@
+<p>Alright man, you're up against <strong>{{opponent.name}}</strong></p>
+
+{{baby-battle
+baby=player.baby
+opponent=opponent
+timeLimit=5000
+onFinish='handle_finish'}}
+
+{{#if done}}
+    {{#if didWin}}
+        <button {{action 'getReward'}} class="btn btn-lg btn-success btn-block">Claim your victory</button>
+    {{else}}
+        <p>Your baby is A WEAK ASS BABY yo</p>
+        <button {{action 'end'}} class="btn btn-lg btn-danger btn-block">WALK AWAY IN SHAME</button>
+    {{/if}}
+{{/if}}

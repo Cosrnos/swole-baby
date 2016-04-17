@@ -3,8 +3,8 @@ import SceneBase from './-scene-base';
 
 export default SceneBase.extend({
   actions: {
-    onClickNext: function () {
-      this.sendAction('onFinish');
+    enterBattle: function () {
+      this.transitionToScene(this.get('scene.encounter'));
     }
   }
 });

@@ -6,6 +6,6 @@ export default Ember.Route.extend({
     return Data.get('player');
   },
   redirect: function () {
-    this.transitionTo('welcome');
+    // this.transitionTo('welcome');
   }
 });

@@ -406,7 +406,7 @@ export default Model.extend(Perkable, {
   rankName: Ember.computed('rank', function () {
     var rank = this.get('rank');
     var minRank = 'F';
-    
+
     Object.keys(BabyData.Rank).forEach((rankName) => {
       if (BabyData.Rank[rankName] === rank) {
         minRank = rankName;
@@ -414,6 +414,10 @@ export default Model.extend(Perkable, {
     });
 
     return minRank;
-  })
+  }),
+
+  minRankName: Ember.computed('rankName', function () {
+    return `isMinRank${this.get('rankName')}`;
+  }),
 
 });

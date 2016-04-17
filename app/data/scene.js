@@ -5,6 +5,7 @@ export default {
     DEBUG: 999,
     STANDARD: 0,
     ENCOUNTER: 1,
+    TOURNEY: 2,
   },
   Rank
 }

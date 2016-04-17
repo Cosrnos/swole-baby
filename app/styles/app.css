@@ -35,3 +35,11 @@
 .invisible {
     opacity: 0;
 }
+
+.border-bottom {
+    border-bottom: 1px solid #000000;
+}
+
+.pad-top-none {
+    padding-top: 0px;
+}

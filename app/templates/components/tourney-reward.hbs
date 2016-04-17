@@ -1,0 +1,18 @@
+<h2>YOU FUCKKIN NAILED IT BRO</h2>
+<p>{{{scene.text}}}</p>
+{{#if scene.prizeList}}
+    <p>
+        You Got:
+    <ul>
+        {{#each scene.prizeList as |prize|}}
+            <li><strong>{{prize}}</strong></li>
+        {{/each}}
+    </ul>
+    </p>
+{{/if}}
+
+{{#if scene.statMod}}
+    <em>Your baby learned a bit from this tourney!</em>
+{{/if}}
+
+<button {{action 'finish'}} class="btn btn-lg btn-block btn-success">Back to training!</button>

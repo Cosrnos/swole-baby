@@ -9,11 +9,17 @@ export default Ember.Controller.extend({
   screen: null,
   scenario: null,
   scenarioFinishHandler: null,
+  scenarioComponentName: Ember.computed.alias('scenario.componentName'),
   
   player: Ember.computed.alias('model'),
   
   isStandardScreen: Ember.computed.equal('screen', 'standard'),
   isScenarioScreen: Ember.computed.equal('screen', 'scenario'),
+  isTourneyListScreen: Ember.computed.equal('screen', 'tourney-list'),
+
+  isTourneyWeek: Ember.computed('player.week', function () {
+    return (this.get('player.week') % 6 === 0);
+  }),
   
   advance: function () {
     this.incrementProperty('player.week');
@@ -40,7 +46,7 @@ export default Ember.Controller.extend({
     var lookupData = {
       random: true,
     };
-    lookupData[`isMinRank${baby.get('rankName')}`] = true;
+    lookupData[baby.get('minRankName')] = true;
     var randomScene = Data.storeFor('scene').getRandom(lookupData);
     if (randomScene) {
       var roll = Math.floor(Math.random() * 100);
@@ -71,6 +77,13 @@ export default Ember.Controller.extend({
         this.send('enterTrainScenario', secondary);
       }
     },
+    handleTourneySelect: function (tourney) {
+      this.get('player.baby').clearStatsDidAdvance();
+      this.set('scenarioFinishHandler', 'handleFinishStandard');
+
+      this.set('scenario', tourney);
+      this.set('screen', 'scenario');
+    },
     enterTrainScenario: function (stat) {
       var scene = Data.storeFor('scene').getRandom({
         type: 'train',
@@ -83,6 +96,12 @@ export default Ember.Controller.extend({
       
       this.set('scenario', scene);
       this.set('screen', 'scenario');
+    },
+    changeScreen: function (screen) {
+      this.set('screen', screen);
+    },
+    handleSceneTransition: function (scene) {
+      this.set('scenario', scene);
     }
   }
 });

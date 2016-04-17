@@ -1,13 +1,18 @@
 import Model from './model';
 import Ember from 'ember';
 import SceneData from '../data/scene';
+import Data from '../services/data';
 
 export default Model.extend({
   modelType: 'scene',
   componentName: null,
   title: null,
-  type: 'train',
+  type: null,
   statMod: null,
+
+  player: Ember.computed('', function () {
+    return Data.get('player');
+  }),
   
   // Rank Info
   isMinRankF: Ember.computed.lte('rank', SceneData.Rank.F),
@@ -21,17 +26,17 @@ export default Model.extend({
   isMinRankCHAMPION: Ember.computed.lte('rank', SceneData.Rank.CHAMPION),
   isMinRankDEBUG: Ember.computed.lte('rank', SceneData.Rank.DEBUG),
   
-  _activate: function (player) {
+  _activate: function (SceneManager, player) {
     var statMod = this.get('statMod');
     if (statMod) {
       player.get('baby').addStats(statMod);
     }
     
-    this.start(player);
+    this.start(SceneManager, player);
   },
-  _deactivate: function (player) {
+  _deactivate: function (SceneManager, player) {
     player.get('baby').clearStatsDidAdvance()
-    this.end(player);
+    this.end(SceneManager, player);
   },
   start: function () {
   },

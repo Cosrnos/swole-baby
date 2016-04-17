@@ -58,8 +58,7 @@ var StoreModel = Ember.ArrayProxy.extend({
     amount = amount || 1;
 
     var pool = this.filterObj(filter);
-    debugger;
-
+    
     if (amount > pool.length) {
       return pool;
     }
