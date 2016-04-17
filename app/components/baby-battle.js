@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import _ from 'lodash/lodash';
 /**
  * Passed in properties:
  * Baby: Our Baby
@@ -9,7 +10,7 @@ export default Ember.Component.extend({
   battleStarted: false,
   battleFinished: false,
   wonBattle: null,
-  timeLeft: 30000, //30 seconds
+  timeLeft: 25000, //25 seconds
 
   init: function () {
     this._super();
@@ -29,10 +30,21 @@ export default Ember.Component.extend({
         this.set('timeLeft', 0);
         this.set('battleStarted', false);
         this.finishBattle();
-
         clearInterval(this.get('timer'));
+        clearInterval(this.get('opponentTimer'));
       }
     }
+  },
+
+  opponentClick: function(){
+    var opponent = this.get('opponent');
+
+    var attacks = [opponent.magicAttack, opponent.charismaAttack, opponent.muscleAttack];
+    var attack = _.sample(attacks);
+
+    attack.call(opponent);
+    Ember.run.throttle(this.jiggleOpponentSwoleness, 300);
+
   },
 
   finishBattle: function(){
@@ -60,6 +72,13 @@ export default Ember.Component.extend({
     });
   },
 
+  jiggleOpponentSwoleness: function () {
+    $('#opponent-swoleness').removeClass('animated-half pulse');
+    Em.run.next(function () {
+      $('#opponent-swoleness').addClass('animated-half pulse');
+    });
+  },
+
 
 
   actions: {
@@ -84,8 +103,14 @@ export default Ember.Component.extend({
         this.battleTick();
       }, 100);
 
+      //Timer to simulate opponent clicks.
+      var opponentTimer = setInterval(() => {
+        this.opponentClick();
+      }, 250);
+
       this.set('timer', timer);
-      this.set('timeLeft', 30000)
+      this.set('opponentTimer', opponentTimer);
+      this.set('timeLeft', 25000)
       this.set('battleStarted', true);
     }
   }

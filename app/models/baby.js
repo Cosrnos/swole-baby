@@ -26,6 +26,7 @@ export default Model.extend(Perkable, {
 
 // Properties
   name: null,
+  isEnemy: null,
 
   str: 2,
   end: 2,
@@ -309,11 +310,13 @@ export default Model.extend(Perkable, {
     newMuscleAttackFatigue = newMuscleAttackFatigue <= 1.05 ? newMuscleAttackFatigue : 1;
 
     this.set('muscleAttackFatigue', newMuscleAttackFatigue);
-
     this.incrementProperty('swoleness', attack);
-    this.animateAttackNumber(attack);
-    if (Math.random() < 0.5) {
-      this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
+
+    if (!this.get('isEnemy')) {
+      this.animateAttackNumber(attack);
+      if (Math.random() < 0.5) {
+        this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
+      }
     }
   },
 
@@ -329,11 +332,13 @@ export default Model.extend(Perkable, {
     newMagicAttackFatigue = newMagicAttackFatigue <= 1.05 ? newMagicAttackFatigue : 1;
 
     this.set('magicAttackFatigue', newMagicAttackFatigue);
-
     this.incrementProperty('swoleness', attack);
-    this.animateAttackNumber(attack);
-    if (Math.random() < 0.5) {
-      this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
+
+    if (!this.get('isEnemy')) {
+      this.animateAttackNumber(attack);
+      if (Math.random() < 0.5) {
+        this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
+      }
     }
   },
 
@@ -349,12 +354,13 @@ export default Model.extend(Perkable, {
     newCharismaAttackFatigue = newCharismaAttackFatigue <= 1.05 ? newCharismaAttackFatigue : 1;
 
     this.set('charismaAttackFatigue', newCharismaAttackFatigue);
-
     this.incrementProperty('swoleness', attack);
 
-    this.animateAttackNumber(attack);
-    if (Math.random() < 0.5) {
-      this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+    if (!this.get('isEnemy')) {
+      this.animateAttackNumber(attack);
+      if (Math.random() < 0.5) {
+        this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+      }
     }
   },
 

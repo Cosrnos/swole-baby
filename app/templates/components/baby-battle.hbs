@@ -1,4 +1,4 @@
-<div class="row">
+<div style="height: 75px;" class="row">
     <div class="col-sm-12">
         <div style="text-align: center">
             {{#unless battleStarted}}
@@ -25,10 +25,10 @@
     <div class="col-sm-6">
         <div class="baby-info">
             <div class="row">
-                <div class="col-sm-10">
-                    <h2>{{baby.name}}</h2>
+                <div class="col-sm-12">
+                    <h2 style="padding-bottom:2px; border-bottom: black 3px solid">{{baby.name}}</h2>
                     <div style="font-size: 30pt; display: block;">Swoleness:
-                        <div style="display: inline-block; -vendor-animation-duration: 3s;" id="baby-swoleness">
+                        <div style="display: inline-block;" id="baby-swoleness">
                             {{roundNum baby.swoleness}}
                         </div>
                     </div>
@@ -36,34 +36,31 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    Muscle Fatigue: {{roundNum baby.muscleAttackFatigue}}
-                    <br>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMusclePercentage}}>
+                    <div style="position: relative;" class="progress fatigue-bar">
+                        <div style="position: absolute; width:100%" class="text-center">Muscle Fatigue</div>
+                        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMusclePercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-success col-sm-12" {{action 'battleClick' 'muscle'}}>Muscle Attack</button>
+                    <button class="btn btn-danger attack-btn col-sm-12" {{action 'battleClick' 'muscle'}}>Muscle Attack</button>
                 </div>
                 <div class="col-sm-4">
-                    Charisma Fatigue: {{roundNum baby.charismaAttackFatigue}}
-                    <br>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style={{babyCharismaPercentage}}>
+                    <div style="position: relative;" class="progress fatigue-bar">
+                        <div style="position: absolute; width:100%" class="text-center">Charisma Fatigue</div>
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style={{babyCharismaPercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-success col-sm-12" {{action 'battleClick' 'charisma'}}>Charisma Attack</button>
+                    <button class="btn btn-warning attack-btn col-sm-12" {{action 'battleClick' 'charisma'}}>Charisma Attack</button>
                 </div>
                 <div class="col-sm-4">
-                    Magic Fatigue: {{roundNum baby.magicAttackFatigue}}
-                    <br>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMagicPercentage}}>
+                    <div style="position: relative;" class="progress fatigue-bar">
+                        <div style="position: absolute; width:100%" class="text-center">Magic Fatigue</div>
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMagicPercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-success col-sm-12" {{action 'battleClick' 'magic'}}>Magic Attack</button>
+                    <button class="btn btn-success attack-btn col-sm-12" {{action 'battleClick' 'magic'}}>Magic Attack</button>
                 </div>
             </div>
         </div>
@@ -72,9 +69,13 @@
         {{#if opponent}}
             <div class="baby-info">
                 <div class="row">
-                    <div class="col-sm-10">
-                        <h2>{{opponent.name}}</h2>
-                        <h3>Swoleness: <span id="opponent-swoleness">{{opponent.swoleness}}</span></h3>
+                    <div class="col-sm-12">
+                        <h2 style="padding-bottom:2px; border-bottom: black 3px solid">{{opponent.name}}</h2>
+                        <div style="font-size: 30pt; display: block;">Swoleness:
+                            <div style="display: inline-block;" id="opponent-swoleness">
+                                {{roundNum opponent.swoleness}}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

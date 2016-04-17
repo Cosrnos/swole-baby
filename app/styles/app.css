@@ -22,3 +22,14 @@
     font-family: Impact;
 }
 
+.fatigue-bar {
+    margin-bottom: 2px;
+}
+
+.attack-btn {
+    font-size: 14pt;
+    font-weight: bold;
+    height: 60px;
+    white-space: normal;
+}
+
