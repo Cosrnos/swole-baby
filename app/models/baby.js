@@ -257,11 +257,15 @@ export default Model.extend(Perkable, {
   }),
   magicAttackRecoveryRate: Ember.computed('wis', function () {
     var wis = this.get('wis');
-    var multiplier = (1 + wis / 100);
+    var multiplier = 1 + ((wis - 10) / 100);
     return 0.01 * multiplier;
   }),
 
-  magicAttackWords: ['shazam', 'abra cadabra', 'firebolt', 'pew pew pew'],
+  magicAttackWords: ['shazam', 'abracadabra', 'firebolt', 'pew pew pew', 'whiz', 'cigam', 'alakazam', 'magic missile',
+    'hocus pocus', 'klaatu barada nikto', 'please', 'wingardium leviosa', 'alohomora', 'expelliarmus', 'expecto patronum',
+    'ultima', 'luminaire', 'voodoo', 'juju', 'necronomicon', 'gandalf the grey', "you're a wizard harry", 'polyjuice',
+    'sorcery', 'moon magic', 'friendship magic', 'untap upkeep draw', 'second main phase', 'black lotus', 'dual land',
+    'werebear', 'ancestral recall', 'counterspell'],
 
   charismaAttackBase: Ember.computed('cha', function () {
     return this.get('cha');
@@ -272,11 +276,14 @@ export default Model.extend(Perkable, {
   }),
   charismaAttackRecoveryRate: Ember.computed('sel', function () {
     var sel = this.get('sel');
-    var multiplier = 1 + (sel / 100);
+    var multiplier = 1 + ((sel - 10) / 100);
 
     return 0.01 * multiplier;
   }),
-  charismaAttackWords: ['wink', 'smile', 'joke', 'single-eyebrow-raise'],
+  charismaAttackWords: ['wink', 'smile', 'joke', 'single-eyebrow-raise', 'foppish grin', 'hair flip', 'compliment',
+    'active listening', 'cool pun', 'hard dis', "tip 'o the hat", 'smirk', 'compliment', 'dig', 'neg', 'double entendre',
+    'triple entendre', 'quandruple entendre', 'single entendre', 'spoony bard', 'non-sequitur', 'soliloquy', 'giggle',
+    'intimidate', 'befriend', 'manipulate', 'pep talk', 'animal friend', 'barter', 'fun fact', 'pro tip'],
 
   muscleAttackBase: Ember.computed('str', function () {
     return this.get('str');
@@ -287,11 +294,14 @@ export default Model.extend(Perkable, {
   }),
   muscleAttackRecoveryRate: Ember.computed('end', function () {
     var end = this.get('end');
-    var multiplier = 1 + (end / 100);
+    var multiplier = 1 + ((end - 10) / 100);
 
     return 0.01 * multiplier;
   }),
-  muscleAttackWords: ['flex', 'stretch', 'pecks', 'swole'],
+  muscleAttackWords: ['flex', 'stretch', 'pecks', 'swole', 'glutes', 'lats', 'leg day', 'progressive resistance',
+    'diesel', 'cornfed', '50 shades of gains', 'muscle milk', 'max gains', 'whey protein', 'bro science', 'squats', 'veins everywhere',
+    'horse powered', 'dead lift', 'yolked', 'beast mode', 'optimus prime', 'campbells chunky souped', 'jacked', 'ripped',
+    'swol night shyamalan'],
 
   battleTick: function () {
     var magicAttackFatigue = this.get('magicAttackFatigue');
@@ -317,12 +327,18 @@ export default Model.extend(Perkable, {
     this.set('muscleAttackFatigue', newMuscleAttackFatigue);
   },
 
+  calcAttack: function (attack, fatigue) {
+    var newAttack = .5 * ( -(attack * fatigue) + (attack / (Math.exp(10 * fatigue - 5) + 1 )) + attack );
+
+    return newAttack;
+  },
+
   muscleAttack: function (opponent) {
     var muscleAttackBase = this.get('muscleAttackBase');
     var muscleAttackFatigue = this.get('muscleAttackFatigue');
     var muscleAttackFatigueRate = this.get('muscleAttackFatigueRate');
 
-    var attack = muscleAttackBase - (muscleAttackBase * muscleAttackFatigue);
+    var attack = this.calcAttack(muscleAttackBase, muscleAttackFatigue);
     attack = attack >= 0 ? attack : 0;
 
     var newMuscleAttackFatigue = muscleAttackFatigue + muscleAttackFatigueRate;
@@ -333,7 +349,7 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.5) {
+      if (Math.random() < 0.6) {
         this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
       }
     }
@@ -344,7 +360,7 @@ export default Model.extend(Perkable, {
     var magicAttackFatigue = this.get('magicAttackFatigue');
     var magicAttackFatigueRate = this.get('magicAttackFatigueRate');
 
-    var attack = magicAttackBase - (magicAttackBase * magicAttackFatigue);
+    var attack = this.calcAttack(magicAttackBase, magicAttackFatigue);
     attack = attack >= 0 ? attack : 0;
 
     var newMagicAttackFatigue = magicAttackFatigue + magicAttackFatigueRate;
@@ -355,7 +371,7 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.5) {
+      if (Math.random() < 0.6) {
         this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
       }
     }
@@ -366,7 +382,7 @@ export default Model.extend(Perkable, {
     var charismaAttackFatigue = this.get('charismaAttackFatigue');
     var charismaAttackFatigueRate = this.get('charismaAttackFatigueRate');
 
-    var attack = charismaAttackBase - (charismaAttackBase * charismaAttackFatigue);
+    var attack = this.calcAttack(charismaAttackBase, charismaAttackFatigue);
     attack = attack >= 0 ? attack : 0;
 
     var newCharismaAttackFatigue = charismaAttackFatigue + charismaAttackFatigueRate;
@@ -377,7 +393,7 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.5) {
+      if (Math.random() < 0.6) {
         this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
       }
     }
@@ -400,7 +416,7 @@ export default Model.extend(Perkable, {
     newNumber.css('left', event.x - (width / 2));
 
     //Animate it floating up.
-    newNumber.animate({ "top": ["-=150px", "swing"], "opacity": "-1" }, 700, function () {
+    newNumber.animate({"top": ["-=150px", "swing"], "opacity": "-1"}, 700, function () {
       newNumber.remove();
     });
   },
@@ -417,7 +433,7 @@ export default Model.extend(Perkable, {
     var width = newDesc.width();
     newDesc.css('left', event.x - (width / 2));
 
-    newDesc.animate({ "top": ["+=100px", "swing"], "opacity": "-1" }, "slow", function () {
+    newDesc.animate({"top": ["+=100px", "swing"], "opacity": "-1"}, "slow", function () {
       newDesc.remove();
     });
   },
