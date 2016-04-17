@@ -66,7 +66,7 @@ export default Model.extend(Perkable, {
 
     keys.forEach((key)=> {
       current[key] += mod[key];
-      if (current[key] < 0) {
+      if (current[key] < 1) {
         current[key] = 1;
       }
 
