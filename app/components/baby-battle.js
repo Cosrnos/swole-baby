@@ -24,13 +24,13 @@ export default Ember.Component.extend({
     },
 
     babyMusclePercentage: Ember.computed('baby.muscleAttackFatigue', function(){
-        return Math.ceil(this.get('baby.muscleAttackFatigue') * 100);
+        return Ember.String.htmlSafe("width: " + Math.ceil(this.get('baby.muscleAttackFatigue') * 100) + "%" );
     }),
     babyMagicPercentage: Ember.computed('baby.magicAttackFatigue', function(){
-        return Math.ceil(this.get('baby.magicAttackFatigue') * 100);
+        return Ember.String.htmlSafe("width: " + Math.ceil(this.get('baby.magicAttackFatigue') * 100)+ "%");
     }),
     babyCharismaPercentage: Ember.computed('baby.charismaAttackFatigue', function(){
-        return Math.ceil(this.get('baby.charismaAttackFatigue') * 100);
+        return Ember.String.htmlSafe("width: " + Math.ceil(this.get('baby.charismaAttackFatigue') * 100)+ "%");
     }),
 
     actions: {
