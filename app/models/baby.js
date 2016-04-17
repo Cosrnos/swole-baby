@@ -35,6 +35,7 @@ export default Model.extend(Perkable, {
   mag: 2,
   wis: 2,
   gender: 'male',
+  rank: BabyData.Rank.F,
 
   strPerc: generatePercMod('str'),
   endPerc: generatePercMod('end'),
@@ -236,7 +237,6 @@ export default Model.extend(Perkable, {
   //Battle Stuff
   swoleness: 0,
 
-
   magicAttackBase: Ember.computed('mag', function () {
     return (this.get('mag'));
   }),
@@ -381,7 +381,7 @@ export default Model.extend(Perkable, {
     newNumber.css('left', event.x - (width / 2));
 
     //Animate it floating up.
-    newNumber.animate({"top": ["-=150px", "swing"], "opacity": "-1"}, 700, function () {
+    newNumber.animate({ "top": ["-=150px", "swing"], "opacity": "-1" }, 700, function () {
       newNumber.remove();
     });
   },
@@ -394,14 +394,26 @@ export default Model.extend(Perkable, {
     newDesc.css('left', event.pageX - 20);
     newDesc.appendTo('body');
 
-
     //now that the element is position, center it above the cursor.
     var width = newDesc.width();
     newDesc.css('left', event.x - (width / 2));
 
-    newDesc.animate({"top": ["+=100px", "swing"], "opacity": "-1"}, "slow", function () {
+    newDesc.animate({ "top": ["+=100px", "swing"], "opacity": "-1" }, "slow", function () {
       newDesc.remove();
     });
-  }
+  },
+
+  rankName: Ember.computed('rank', function () {
+    var rank = this.get('rank');
+    var minRank = 'F';
+    
+    Object.keys(BabyData.Rank).forEach((rankName) => {
+      if (BabyData.Rank[rankName] === rank) {
+        minRank = rankName;
+      }
+    });
+
+    return minRank;
+  })
 
 });

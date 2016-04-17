@@ -3,6 +3,5 @@
 {{/if}}
 
 {{#if isScenarioScreen}}
-    {{debugger}}
-    {{component scenario.componentName scene=scenario onFinish='handleFinishScenario'}}
+    {{component scenario.componentName scene=scenario onFinish=scenarioFinishHandler}}
 {{/if}}

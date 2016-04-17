@@ -1,3 +1,5 @@
+import Rank from './rank';
+
 var profiles = [{
   name: `trygvee`,
   gender: 'male',
@@ -42,5 +44,6 @@ var profiles = [{
 export default {
   getRandomProfile: function () {
     return profiles[Math.floor(Math.random() * profiles.length)];
-  }
+  },
+  Rank
 }
