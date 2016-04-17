@@ -2,17 +2,23 @@
     min-height: 100vh;
 }
 
+
 .numberBounce {
     position: absolute;
-    font-size:30pt;
+    font-size: 25pt;
     opacity: 1;
     pointer-events: none;
+    font-family: 'Impact';
+    color:black;
+
 }
 
 .descBounce {
     position: absolute;
-    font-size:24pt;
+    font-size:20pt;
     opacity: 1;
     font-style: italic;
     pointer-events: none;
+    font-family: Impact;
 }
+

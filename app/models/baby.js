@@ -247,9 +247,9 @@ export default Model.extend(Perkable, {
     return 0.01;
   }),
 
-  magicAttackWords: ['shazam','abra cadabra','firebolt','pew pew pew'],
+  magicAttackWords: ['shazam', 'abra cadabra', 'firebolt', 'pew pew pew'],
 
-  charismaAttackBase: Ember.computed('cha', function() {
+  charismaAttackBase: Ember.computed('cha', function () {
     return this.get('cha');
   }),
   charismaAttackFatigue: 0,
@@ -259,9 +259,9 @@ export default Model.extend(Perkable, {
   charismaAttackRecoveryRate: Ember.computed('sel', function () {
     return 0.01;
   }),
-  charismaAttackWords: ['wink','smile','joke','single-eyebrow-raise'],
+  charismaAttackWords: ['wink', 'smile', 'joke', 'single-eyebrow-raise'],
 
-  muscleAttackBase:  Ember.computed('str', function() {
+  muscleAttackBase: Ember.computed('str', function () {
     return this.get('str');
   }),
   muscleAttackFatigue: 0,
@@ -271,7 +271,7 @@ export default Model.extend(Perkable, {
   muscleAttackRecoveryRate: Ember.computed('end', function () {
     return 0.01;
   }),
-  muscleAttackWords: ['flex','stretch','pecks','swole'],
+  muscleAttackWords: ['flex', 'stretch', 'pecks', 'swole'],
 
   battleTick: function () {
     var magicAttackFatigue = this.get('magicAttackFatigue');
@@ -312,7 +312,9 @@ export default Model.extend(Perkable, {
 
     this.incrementProperty('swoleness', attack);
     this.animateAttackNumber(attack);
-    this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
+    if (Math.random() < 0.5) {
+      this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
+    }
   },
 
   magicAttack: function (opponent) {
@@ -330,7 +332,9 @@ export default Model.extend(Perkable, {
 
     this.incrementProperty('swoleness', attack);
     this.animateAttackNumber(attack);
-    this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
+    if (Math.random() < 0.5) {
+      this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
+    }
   },
 
   charismaAttack: function (opponent) {
@@ -347,45 +351,49 @@ export default Model.extend(Perkable, {
     this.set('charismaAttackFatigue', newCharismaAttackFatigue);
 
     this.incrementProperty('swoleness', attack);
+
     this.animateAttackNumber(attack);
-    this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+    if (Math.random() < 0.5) {
+      this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+    }
   },
 
-  animateAttackNumber: function(number){
+  animateAttackNumber: function (number) {
     var newNumber = $('#numberBounce').clone();
-    if(number < 10){
-      number = parseFloat(number, 10).toFixed(3);
-    }else{
+    if (number < 10) {
+      number = parseFloat(number, 10).toFixed(2);
+    } else {
       number = parseFloat(number, 10).toFixed(0);
     }
     newNumber.append(number);
-    newNumber.css('top',event.y-50);
-    newNumber.css('left',event.x-20);
+    newNumber.css('top', event.pageY - 40);
+    newNumber.css('left', event.pageX - 20);
     newNumber.appendTo('body');
 
     //now that the element is position, center it above the cursor.
     var width = newNumber.width();
-    newNumber.css('left',event.x-(width/2));
+    newNumber.css('left', event.x - (width / 2));
 
     //Animate it floating up.
-    newNumber.animate({ "top": ["-=100px", "swing"], "opacity": "-1" }, "slow", function(hi){
+    newNumber.animate({"top": ["-=150px", "swing"], "opacity": "-1"}, 700, function () {
       newNumber.remove();
     });
   },
 
-  animateAttackDesc: function(desc){
+  animateAttackDesc: function (desc) {
     var newDesc = $('#descBounce').clone();
 
     newDesc.append(desc);
-    newDesc.css('top',event.y+20);
-    newDesc.css('left',event.x-20);
+    newDesc.css('top', event.pageY + 15);
+    newDesc.css('left', event.pageX - 20);
     newDesc.appendTo('body');
+
 
     //now that the element is position, center it above the cursor.
     var width = newDesc.width();
-    newDesc.css('left',event.x-(width/2));
+    newDesc.css('left', event.x - (width / 2));
 
-    newDesc.animate({ "top": ["+=100px", "swing"], "opacity": "-1" }, "slow", function(hi){
+    newDesc.animate({"top": ["+=100px", "swing"], "opacity": "-1"}, "slow", function () {
       newDesc.remove();
     });
   }

@@ -1,10 +1,37 @@
 <div class="row">
+    <div class="col-sm-12">
+        <div style="text-align: center">
+            {{#unless battleStarted}}
+                {{#unless battleFinished}}
+                    <button class="btn btn-success" {{action 'startBattle'}}>Start Battle!</button>
+                {{else}}
+                    {{#if wonBattle}}
+                        Yo baby was swollest today, dawg.
+                    {{else}}
+                        Yo baby was didn't have it today, dawgstar.  Sorry.
+                    {{/if}}
+                    <br>
+                    <button class="btn btn-success" {{action 'leaveBattle'}}>We're done here, brotown.</button>
+                {{/unless}}
+
+            {{else}}
+                <h1>{{timeLeft}}</h1>
+            {{/unless}}
+
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-6">
         <div class="baby-info">
             <div class="row">
                 <div class="col-sm-10">
                     <h2>{{baby.name}}</h2>
-                    <h3>Swoleness: <span id="baby-swoleness">{{roundNum baby.swoleness}}</span></h3>
+                    <div style="font-size: 30pt; display: block;">Swoleness:
+                        <div style="display: inline-block; -vendor-animation-duration: 3s;" id="baby-swoleness">
+                            {{roundNum baby.swoleness}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
