@@ -13,9 +13,11 @@ Router.map(function () {
     this.route('perk');
     this.route('ready');
     this.route('battle');
+    this.route('redo');
   });
   this.route('battle');
   this.route('week');
+  this.route('finish');
 });
 
 export default Router;

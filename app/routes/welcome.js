@@ -6,7 +6,9 @@ export default Ember.Route.extend({
     return Data.get('baby')
   },
 
-  redirect: function () {
-    return this.transitionTo('welcome.intro');
+  redirect: function (model, transition) {
+    if(!Data.get('player.didCompleteTutorial')){
+      return this.transitionTo('welcome.intro');
+    }
   }
 });

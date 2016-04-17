@@ -4,7 +4,7 @@ import SceneData from '../data/scene';
 import TourneySchedule from '../services/tourney-schedule';
 
 const RSVP = Ember.RSVP;
-const MAX_WEEKS = 12;
+const MAX_WEEKS = 52;
 
 export default Ember.Controller.extend({
   screen: null,
@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
     this.set('screen', 'standard');
   },
   checkEndgame: function () {
-    return (this.get('player.weeks') > MAX_WEEKS)
+    return ((this.get('player.week') > MAX_WEEKS) || this.get('player.baby.rank') >= SceneData.Rank.CHAMPION)
   },
   rollForRandom: function () {
     var baby = this.get('player.baby');

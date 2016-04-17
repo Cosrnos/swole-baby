@@ -1,0 +1,16 @@
+{{#if baby.isChampion}}
+    <h3>You Did it yo!!!</h3>
+    <p>Dude your baby is THE SWOLLEST BABY IN THE UNIVERSE</p>
+    <p>Unfortunately that means you're out of a job and have to go back to living on the streets. If you're up for it
+        though
+        I can find you another client!</p>
+{{else}}
+    <h3>Yo' baby got old</h3>
+    <p>It looks like <strong>{{baby.name}}</strong> is too old to keep participating in Tournaments, which basically
+        makes {{baby.him_her}} useless.</p>
+    <p>Fortunately for you I can get you another client at the snap of a finger, broski</p>
+{{/if}}
+
+{{#link-to 'welcome.redo' class="btn btn-success btn-lg"}}
+    Train another baby
+{{/link-to}}
