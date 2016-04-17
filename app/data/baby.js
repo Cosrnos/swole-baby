@@ -60,10 +60,14 @@ export default {
     var getRandomStat = function () {
       return statNames[Math.floor(Math.random() * statNames.length)];
     };
+    var statDistro = Math.floor(4 * rank);
+    debugger;
 
-    for (var i = 0; i < rank; i++) {
+    for (var i = 0; i < statDistro; i++) {
       babyStats[getRandomStat()] += 1;
     }
+
+    console.log(babyStats);
 
     return Object.assign({
       rank: rank

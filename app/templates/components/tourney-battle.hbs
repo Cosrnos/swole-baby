@@ -3,14 +3,18 @@
 {{baby-battle
 baby=player.baby
 opponent=opponent
-timeLimit=5000
+timeLimit=30000
 onFinish='handle_finish'}}
+
+<div id="numberBounce" class='numberBounce'></div>
+<div id="descBounce" class='descBounce'></div>
+
 
 {{#if done}}
     {{#if didWin}}
-        <button {{action 'getReward'}} class="btn btn-lg btn-success btn-block">Claim your victory</button>
+        <button {{action 'getReward'}} class="btn btn-lg btn-success">Claim your victory</button>
     {{else}}
         <p>Your baby is A WEAK ASS BABY yo</p>
-        <button {{action 'end'}} class="btn btn-lg btn-danger btn-block">WALK AWAY IN SHAME</button>
+        <button {{action 'end'}} class="btn btn-lg btn-danger">WALK AWAY IN SHAME</button>
     {{/if}}
 {{/if}}

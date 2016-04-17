@@ -237,6 +237,15 @@ export default Model.extend(Perkable, {
   //Battle Stuff
   swoleness: 0,
 
+  prepareForBattle: function () {
+    this.setProperties({
+      swoleness: 0,
+      magicAttackFatigue: 0,
+      charismaAttackFatigue: 0,
+      muscleAttackFatigue: 0
+    });
+  },
+
   magicAttackBase: Ember.computed('mag', function () {
     return (this.get('mag'));
   }),

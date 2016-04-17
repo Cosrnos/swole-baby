@@ -4,8 +4,9 @@ import BabyData from '../data/baby';
 import SceneBase from './-scene-base';
 
 export default SceneBase.extend({
-  opponent: Ember.computed('rank', function () {
-    return BabyModel.create(BabyData.generateRankedBabyStats());
+  opponent: Ember.computed('scene.rank', function () {
+    debugger;
+    return BabyModel.create(BabyData.generateRankedBabyStats(this.get('scene.rank')));
   }),
   actions: {
     handle_finish: function (stats) {

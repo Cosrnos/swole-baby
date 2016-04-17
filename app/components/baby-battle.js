@@ -17,6 +17,8 @@ export default Ember.Component.extend({
   }),
 
   init: function () {
+    this.prepareBabies();
+
     if (this.get('startOnRender')) {
       this.send('startBattle');
     }
@@ -79,6 +81,17 @@ export default Ember.Component.extend({
   babyCharismaPercentage: Ember.computed('baby.charismaAttackFatigue', function () {
     return Ember.String.htmlSafe("width: " + Math.ceil(this.get('baby.charismaAttackFatigue') * 100) + "%");
   }),
+
+  prepareBabies: function () {
+    var baby = this.get('baby');
+    var opponent = this.get('opponent');
+
+    baby.prepareForBattle();
+
+    if (opponent) {
+      opponent.prepareForBattle();
+    }
+  },
 
   jiggleSwoleness: function () {
     $('#baby-swoleness').removeClass('animated-half pulse');
