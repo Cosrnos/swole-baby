@@ -28,26 +28,15 @@ export default Ember.Mixin.create({
   },
 
   _activateStatMods: function (mod, target) {
-    var keys = Object.keys(mod);
-    var current = target.getProperties(keys);
-
-    keys.forEach((key)=> {
-      current[key] += mod[key];
-      if (current[key] < 0) {
-        current[key] = 1;
-      }
-    });
-
-    target.setProperties(current);
+    target.addStats(mod);
   },
   _deactivateStatMods: function (mod, target) {
-    var keys = Object.keys(mod);
-    var current = target.getProperties(keys);
+    var inverted = {};
 
-    keys.forEach((key)=> {
-      current[key] -= mod[key];
+    Object.keys(mod).forEach(function (key) {
+      inverted[key] = mod[key] * -1;
     });
-
-    target.setProperties(current);
+    
+    target.addStats(inverted);
   },
 });

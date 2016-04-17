@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import Data from '../../services/data';
 import PerkData from '../../data/perk';
+import ClearStatsOnWillTransition from '../../mixins/clear-stats-on-will-transition';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ClearStatsOnWillTransition, {
   model: function () {
     return Data.storeFor('perk').getRandom({
       rank: PerkData.Rank.F
@@ -21,10 +22,11 @@ export default Ember.Route.extend({
   actions: {
     select_perk: function (perk) {
       var baby = this.get('controller.player.baby');
-      baby.activatePerk(perk);
 
       // TODO: Redirect this to the battle tutorial
       this.transitionTo('welcome.ready');
+
+      baby.activatePerk(perk);
     }
   }
 });

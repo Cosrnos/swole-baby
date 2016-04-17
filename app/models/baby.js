@@ -41,6 +41,8 @@ export default Model.extend(Perkable, {
   magPerc: generatePercMod('mag'),
   wisPerc: generatePercMod('wis'),
 
+  statChanges: null,
+
   // Computed Macros
   isMale: Ember.computed.equal('gender', 'male'),
 
@@ -50,9 +52,45 @@ export default Model.extend(Perkable, {
       this.setProperties(BabyData.getRandomProfile());
     }
 
+    this.set('statChanges', []);
+
     this._super();
-  }
-  ,
+  },
+
+  addStats: function (mod) {
+    var keys = Object.keys(mod);
+    var current = this.getProperties(keys);
+
+    keys.forEach((key)=> {
+      current[key] += mod[key];
+      if (current[key] < 0) {
+        current[key] = 1;
+      }
+
+      this.set(`${key}ChangeIcon`, (mod[key] > -1) ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down');
+      this.set(`${key}ChangeColor`, (mod[key] > -1) ? 'text-success' : 'text-danger');
+    });
+
+    this.setProperties(current);
+  },
+
+  clearStatsDidAdvance: function () {
+    debugger;
+    this.setProperties({
+      strChangeIcon: '',
+      strChangeColor: '',
+      endChangeIcon: '',
+      endChangeColor: '',
+      chaChangeIcon: '',
+      chaChangeColor: '',
+      selChangeIcon: '',
+      selChangeColor: '',
+      magChangeIcon: '',
+      magChangeColor: '',
+      wisChangeIcon: '',
+      wisChangeColor: '',
+    });
+  },
 
 // Computed Properties
   s_he: Ember.computed('isMale', function () {

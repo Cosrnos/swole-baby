@@ -1,23 +1,24 @@
 import Ember from 'ember';
+import ClearStatsOnWillTransition from '../../mixins/clear-stats-on-will-transition';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ClearStatsOnWillTransition, {
   actions: {
     pick_activity: function (activity) {
       var baby = this.get('controller.model');
 
+      this.transitionTo('welcome.perk');
+      
       switch (activity) {
         case 'gym':
-          baby.incrementProperty('end');
+          baby.addStats({ end: 1 });
           break;
         case 'tan':
-          baby.incrementProperty('sel');
+          baby.addStats({ sel: 1 });
           break;
         case 'laundry':
-          baby.incrementProperty('wis');
+          baby.addStats({ wis: 1 });
           break;
       }
-
-      this.transitionTo('welcome.perk');
     }
   }
 });
