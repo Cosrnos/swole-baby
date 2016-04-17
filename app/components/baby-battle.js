@@ -108,7 +108,7 @@ export default Ember.Component.extend({
     });
   },
 
-  _actuallyForRealBeginTheBattle: function(){
+  _actuallyForRealBeginTheBattle: function () {
     var timer = setInterval(() => {
       this.battleTick();
     }, 100);
@@ -117,7 +117,7 @@ export default Ember.Component.extend({
     if (this.get('opponent')) {
       var opponentTimer = setInterval(() => {
         this.opponentClick();
-      }, 250);
+      }, this.get('opponent.clickInterval'));
       this.set('opponentTimer', opponentTimer);
     }
 
@@ -146,17 +146,17 @@ export default Ember.Component.extend({
     //Start the countdown timer to begin the battle.
     startBattle: function () {
       //Countdown to the battle:
-      this.set('battleCountdownStarted',true);
+      this.set('battleCountdownStarted', true);
 
       var countDown = 2000;
       var battleCountDownTimer = setInterval(() => {
         countDown -= 20;
-        this.set('battleStartCountdown', (countDown/1000).toFixed(2));
+        this.set('battleStartCountdown', (countDown / 1000).toFixed(2));
 
-        var battleCountdownPercentage = Math.ceil( ( (countDown / 2000)) * 100);
+        var battleCountdownPercentage = Math.ceil(( (countDown / 2000)) * 100);
         this.set('battleCountdownPercentage', `width: ${battleCountdownPercentage}%`);
 
-        if(countDown <= 0){
+        if (countDown <= 0) {
           //Actually Begin the battle
           this._actuallyForRealBeginTheBattle();
           clearInterval(battleCountDownTimer);

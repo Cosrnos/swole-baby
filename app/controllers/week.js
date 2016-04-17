@@ -25,6 +25,7 @@ export default Ember.Controller.extend({
   
   advance: function () {
     this.incrementProperty('player.week');
+    var week = this.get('player.week');
     this.get('player.baby').clearStatsDidAdvance();
     var done = this.checkEndgame();
     
@@ -32,12 +33,14 @@ export default Ember.Controller.extend({
       return this.transitionToRoute('finish');
     }
 
-    this.set('tourneyHighlight', TourneySchedule.get('availableTourneys.0'))
+    this.set('tourneyHighlight', TourneySchedule.get('availableTourneys.0'));
     
-    var random_hook = this.rollForRandom();
-    
-    if (random_hook) {
-      return this.renderRandom(random_hook);
+    if (week > 1) {
+      var random_hook = this.rollForRandom();
+
+      if (random_hook) {
+        return this.renderRandom(random_hook);
+      }
     }
     
     this.set('screen', 'standard');
