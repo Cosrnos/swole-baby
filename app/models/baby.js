@@ -4,6 +4,21 @@ import BabyData from '../data/baby';
 import PerkData from '../data/perk';
 import Perkable from '../mixins/perkable';
 
+function generatePercMod(property) {
+  return Ember.computed(property, function () {
+    var p = this.get(property);
+    p = p * 2;
+
+    if (p < 10) {
+      return 10;
+    } else if (p > 100) {
+      return 100;
+    }
+
+    return p
+  });
+}
+
 export default Model.extend(Perkable, {
   modelType: 'baby',
   targetType: PerkData.Targets.Baby,
@@ -18,6 +33,13 @@ export default Model.extend(Perkable, {
   mag: 2,
   wis: 2,
   gender: 'male',
+
+  strPerc: generatePercMod('str'),
+  endPerc: generatePercMod('end'),
+  chaPerc: generatePercMod('cha'),
+  selPerc: generatePercMod('sel'),
+  magPerc: generatePercMod('mag'),
+  wisPerc: generatePercMod('wis'),
 
   // Computed Macros
   isMale: Ember.computed.equal('gender', 'male'),
@@ -172,44 +194,43 @@ export default Model.extend(Perkable, {
     }
   }),
 
-
   //Battle Stuff
   swoleness: 0,
 
-  magicAttackBase: Ember.computed('mag', function() {
+  magicAttackBase: Ember.computed('mag', function () {
     return (this.get('mag'));
   }),
   magicAttackFatigue: 0,
-  magicAttackFatigueRate: Ember.computed('magicAttackBase', function() {
+  magicAttackFatigueRate: Ember.computed('magicAttackBase', function () {
     return 0.05;
   }),
-  magicAttackRecoveryRate: Ember.computed('wis', function() {
+  magicAttackRecoveryRate: Ember.computed('wis', function () {
     return 0.01;
   }),
 
-  charismaAttackBase: Ember.computed('cha', function() {
+  charismaAttackBase: Ember.computed('cha', function () {
     return (this.get('cha'));
   }),
   charismaAttackFatigue: 0,
-  charismaAttackFatigueRate: Ember.computed('charismaAttackBase', function() {
+  charismaAttackFatigueRate: Ember.computed('charismaAttackBase', function () {
     return 0.05;
   }),
-  charismaAttackRecoveryRate: Ember.computed('sel', function() {
+  charismaAttackRecoveryRate: Ember.computed('sel', function () {
     return 0.01;
   }),
 
-  muscleAttackBase:  Ember.computed('str', function() {
+  muscleAttackBase: Ember.computed('str', function () {
     return (this.get('str')) * 0.05;
   }),
   muscleAttackFatigue: 0,
-  muscleAttackFatigueRate: Ember.computed('muscleAttackBase', function() {
+  muscleAttackFatigueRate: Ember.computed('muscleAttackBase', function () {
     return 0.05;
   }),
-  muscleAttackRecoveryRate: Ember.computed('end', function() {
+  muscleAttackRecoveryRate: Ember.computed('end', function () {
     return 0.01;
   }),
 
-  battleTick: function(){
+  battleTick: function () {
     var magicAttackFatigue = this.get('magicAttackFatigue');
     var magicAttackRecoveryRate = this.get('magicAttackRecoveryRate');
 
@@ -233,7 +254,7 @@ export default Model.extend(Perkable, {
     this.set('muscleAttackFatigue', newMuscleAttackFatigue);
   },
 
-  muscleAttack: function(opponent) {
+  muscleAttack: function (opponent) {
     var muscleAttackBase = this.get('muscleAttackBase');
     var muscleAttackFatigue = this.get('muscleAttackFatigue');
     var muscleAttackFatigueRate = this.get('muscleAttackFatigueRate');
@@ -249,7 +270,7 @@ export default Model.extend(Perkable, {
     this.incrementProperty('swoleness', attack);
   },
 
-  magicAttack: function(opponent) {
+  magicAttack: function (opponent) {
     var magicAttackBase = this.get('magicAttackBase');
     var magicAttackFatigue = this.get('magicAttackFatigue');
     var magicAttackFatigueRate = this.get('magicAttackFatigueRate');
@@ -265,7 +286,7 @@ export default Model.extend(Perkable, {
     this.incrementProperty('swoleness', attack);
   },
 
-  charismaAttack: function(opponent) {
+  charismaAttack: function (opponent) {
     var charismaAttackBase = this.get('charismaAttackBase');
     var charismaAttackFatigue = this.get('charismaAttackFatigue');
     var charismaAttackFatigueRate = this.get('charismaAttackFatigueRate');
@@ -279,4 +300,5 @@ export default Model.extend(Perkable, {
     this.set('charismaAttackFatigue', newCharismaAttackFatigue);
 
     this.incrementProperty('swoleness', attack);
-}});
+  }
+});

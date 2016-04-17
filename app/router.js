@@ -11,6 +11,7 @@ Router.map(function () {
     this.route('intro');
     this.route('activity');
     this.route('perk');
+    this.route('ready');
   });
   this.route('battle');
 });

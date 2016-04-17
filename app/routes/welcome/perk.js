@@ -22,6 +22,9 @@ export default Ember.Route.extend({
     select_perk: function (perk) {
       var baby = this.get('controller.player.baby');
       baby.activatePerk(perk);
+
+      // TODO: Redirect this to the battle tutorial
+      this.transitionTo('welcome.ready');
     }
   }
 });
