@@ -6,6 +6,7 @@ export default {
     STANDARD: 0,
     ENCOUNTER: 1,
     TOURNEY: 2,
+    RANDOM: 3,
   },
   Rank
 }
