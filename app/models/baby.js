@@ -3,6 +3,7 @@ import Ember from 'ember';
 import BabyData from '../data/baby';
 import PerkData from '../data/perk';
 import Perkable from '../mixins/perkable';
+import _ from 'lodash/lodash';
 
 function generatePercMod(property) {
   return Ember.computed(property, function () {
@@ -235,6 +236,7 @@ export default Model.extend(Perkable, {
   //Battle Stuff
   swoleness: 0,
 
+
   magicAttackBase: Ember.computed('mag', function () {
     return (this.get('mag'));
   }),
@@ -246,8 +248,10 @@ export default Model.extend(Perkable, {
     return 0.01;
   }),
 
-  charismaAttackBase: Ember.computed('cha', function () {
-    return (this.get('cha'));
+  magicAttackWords: ['shazam','abra cadabra','firebolt','pew pew pew'],
+
+  charismaAttackBase: Ember.computed('cha', function() {
+    return this.get('cha');
   }),
   charismaAttackFatigue: 0,
   charismaAttackFatigueRate: Ember.computed('charismaAttackBase', function () {
@@ -256,9 +260,10 @@ export default Model.extend(Perkable, {
   charismaAttackRecoveryRate: Ember.computed('sel', function () {
     return 0.01;
   }),
+  charismaAttackWords: ['wink','smile','joke','single-eyebrow-raise'],
 
-  muscleAttackBase: Ember.computed('str', function () {
-    return (this.get('str')) * 0.05;
+  muscleAttackBase:  Ember.computed('str', function() {
+    return this.get('str');
   }),
   muscleAttackFatigue: 0,
   muscleAttackFatigueRate: Ember.computed('muscleAttackBase', function () {
@@ -267,6 +272,7 @@ export default Model.extend(Perkable, {
   muscleAttackRecoveryRate: Ember.computed('end', function () {
     return 0.01;
   }),
+  muscleAttackWords: ['flex','stretch','pecks','swole'],
 
   battleTick: function () {
     var magicAttackFatigue = this.get('magicAttackFatigue');
@@ -301,11 +307,13 @@ export default Model.extend(Perkable, {
     attack = attack >= 0 ? attack : 0;
 
     var newMuscleAttackFatigue = muscleAttackFatigue + muscleAttackFatigueRate;
-    newMuscleAttackFatigue = newMuscleAttackFatigue <= 1 ? newMuscleAttackFatigue : 1;
+    newMuscleAttackFatigue = newMuscleAttackFatigue <= 1.05 ? newMuscleAttackFatigue : 1;
 
     this.set('muscleAttackFatigue', newMuscleAttackFatigue);
 
     this.incrementProperty('swoleness', attack);
+    this.animateAttackNumber(attack);
+    this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
   },
 
   magicAttack: function (opponent) {
@@ -317,11 +325,13 @@ export default Model.extend(Perkable, {
     attack = attack >= 0 ? attack : 0;
 
     var newMagicAttackFatigue = magicAttackFatigue + magicAttackFatigueRate;
-    newMagicAttackFatigue = newMagicAttackFatigue <= 1 ? newMagicAttackFatigue : 1;
+    newMagicAttackFatigue = newMagicAttackFatigue <= 1.05 ? newMagicAttackFatigue : 1;
 
     this.set('magicAttackFatigue', newMagicAttackFatigue);
 
     this.incrementProperty('swoleness', attack);
+    this.animateAttackNumber(attack);
+    this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
   },
 
   charismaAttack: function (opponent) {
@@ -333,10 +343,52 @@ export default Model.extend(Perkable, {
     attack = attack >= 0 ? attack : 0;
 
     var newCharismaAttackFatigue = charismaAttackFatigue + charismaAttackFatigueRate;
-    newCharismaAttackFatigue = newCharismaAttackFatigue <= 1 ? newCharismaAttackFatigue : 1;
+    newCharismaAttackFatigue = newCharismaAttackFatigue <= 1.05 ? newCharismaAttackFatigue : 1;
 
     this.set('charismaAttackFatigue', newCharismaAttackFatigue);
 
     this.incrementProperty('swoleness', attack);
+    this.animateAttackNumber(attack);
+    this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+  },
+
+  animateAttackNumber: function(number){
+    var newNumber = $('#numberBounce').clone();
+    if(number < 10){
+      number = parseFloat(number, 10).toFixed(3);
+    }else{
+      number = parseFloat(number, 10).toFixed(0);
+    }
+    newNumber.append(number);
+    newNumber.css('top',event.y-50);
+    newNumber.css('left',event.x-20);
+    newNumber.appendTo('body');
+
+    //now that the element is position, center it above the cursor.
+    var width = newNumber.width();
+    newNumber.css('left',event.x-(width/2));
+
+    //Animate it floating up.
+    newNumber.animate({ "top": ["-=100px", "swing"], "opacity": "-1" }, "slow", function(hi){
+      newNumber.remove();
+    });
+  },
+
+  animateAttackDesc: function(desc){
+    var newDesc = $('#descBounce').clone();
+
+    newDesc.append(desc);
+    newDesc.css('top',event.y+20);
+    newDesc.css('left',event.x-20);
+    newDesc.appendTo('body');
+
+    //now that the element is position, center it above the cursor.
+    var width = newDesc.width();
+    newDesc.css('left',event.x-(width/2));
+
+    newDesc.animate({ "top": ["+=100px", "swing"], "opacity": "-1" }, "slow", function(hi){
+      newDesc.remove();
+    });
   }
+
 });

@@ -18,7 +18,5 @@ export default Ember.Route.extend({
 
         controller.set('opponent',opponent);
         controller.set('baby', baby);
-
-        debugger;
     }
 });
