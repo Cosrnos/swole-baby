@@ -66,10 +66,9 @@ export default {
       babyStats[getRandomStat()] += 1;
     }
 
-    console.log(babyStats);
-
     return Object.assign({
-      rank: rank
+      rank: rank,
+      clicksPerSec: (4 + ((rank - 10) * 0.08),
     }, profile, babyStats);
   },
   Rank

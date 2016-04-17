@@ -34,6 +34,7 @@ export default Model.extend(Perkable, {
   sel: 2,
   mag: 2,
   wis: 2,
+  clicksPerSec: 4, // AI Controlled only
   gender: 'male',
   rank: BabyData.Rank.F,
 
@@ -437,4 +438,7 @@ export default Model.extend(Perkable, {
     return `isMinRank${this.get('rankName')}`;
   }),
 
+  clickInterval: Ember.computed('clicksPerSec', function () {
+    return Math.floor(1000 / (this.get('clicksPerSec') || 4));
+  })
 });
