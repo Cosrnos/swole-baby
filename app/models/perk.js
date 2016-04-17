@@ -27,7 +27,7 @@ export default Model.extend({
   }),
 
   _activate: function () {
-
+    
   },
   _deactivate: function () {
 

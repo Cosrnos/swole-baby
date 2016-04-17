@@ -14,6 +14,7 @@ Router.map(function () {
     this.route('ready');
   });
   this.route('battle');
+  this.route('week');
 });
 
 export default Router;

@@ -1,0 +1,8 @@
+{{#if isStandardScreen}}
+    {{partial 'weekStandard'}}
+{{/if}}
+
+{{#if isScenarioScreen}}
+    {{debugger}}
+    {{component scenario.componentName scene=scenario onFinish='handleFinishScenario'}}
+{{/if}}

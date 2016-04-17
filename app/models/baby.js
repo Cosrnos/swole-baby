@@ -76,7 +76,6 @@ export default Model.extend(Perkable, {
   },
 
   clearStatsDidAdvance: function () {
-    debugger;
     this.setProperties({
       strChangeIcon: '',
       strChangeColor: '',
