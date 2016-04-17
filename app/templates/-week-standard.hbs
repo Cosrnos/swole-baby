@@ -1,5 +1,8 @@
 <h3>Week {{player.week}}</h3>
 <p>You have until Week 12 To Do the thing.</p>
+{{#if tourneyHighlight}}
+    <p><strong>The {{tourneyHighlight.name}} tourney is this week!</strong></p>
+{{/if}}
 <p></p><br/><br/>
 <div class="col-xs-1"></div>
 <div class="col-xs-5">

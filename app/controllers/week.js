@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Data from '../services/data';
 import SceneData from '../data/scene';
+import TourneySchedule from '../services/tourney-schedule';
 
 const RSVP = Ember.RSVP;
 const MAX_WEEKS = 12;
@@ -8,6 +9,7 @@ const MAX_WEEKS = 12;
 export default Ember.Controller.extend({
   screen: null,
   scenario: null,
+  tourneyHighlight: null,
   scenarioFinishHandler: null,
   scenarioComponentName: Ember.computed.alias('scenario.componentName'),
   
@@ -29,6 +31,8 @@ export default Ember.Controller.extend({
     if (done) {
       return this.transitionToRoute('finish');
     }
+
+    this.set('tourneyHighlight', TourneySchedule.get('availableTourneys.0'))
     
     var random_hook = this.rollForRandom();
     
