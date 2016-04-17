@@ -12,9 +12,15 @@ export default Ember.Component.extend({
   wonBattle: null,
   timeLeft: 25000, //25 seconds
 
-  init: function () {
-    this._super();
+  timeLeftFormatted: Ember.computed('timeLeft', function () {
+    return (this.get('timeLeft') / 1000).toFixed(1);
+  }),
 
+  init: function () {
+    if (this.get('startOnRender')) {
+      this.send('startBattle');
+    }
+    this._super();
   },
 
   battleTick: function () {
@@ -23,7 +29,9 @@ export default Ember.Component.extend({
       var opponent = this.get('opponent');
 
       baby.battleTick();
-      opponent.battleTick();
+      if (opponent) {
+        opponent.battleTick();
+      }
 
       this.decrementProperty('timeLeft', 100);
       if (this.get('timeLeft') < 0) {
@@ -36,7 +44,7 @@ export default Ember.Component.extend({
     }
   },
 
-  opponentClick: function(){
+  opponentClick: function () {
     var opponent = this.get('opponent');
 
     var attacks = [opponent.magicAttack, opponent.charismaAttack, opponent.muscleAttack];
@@ -47,12 +55,19 @@ export default Ember.Component.extend({
 
   },
 
-  finishBattle: function(){
+  finishBattle: function () {
     this.set('battleFinished', true);
+    var playerSwoleness = this.get('baby.swoleness') || 0;
+    var opponentSwoleness = this.get('opponent.swoleness') || 0;
 
-    var didWin = this.get('baby.swoleness') > this.get('opponent.swoleness');
+    var didWin = playerSwoleness > opponentSwoleness;
     this.set('wonBattle', didWin);
 
+    this.sendAction('onFinish', {
+      playerSwoleness,
+      opponentSwoleness,
+      didWin
+    });
   },
 
   babyMusclePercentage: Ember.computed('baby.muscleAttackFatigue', function () {
@@ -79,8 +94,6 @@ export default Ember.Component.extend({
     });
   },
 
-
-
   actions: {
     battleClick: function (type) {
       if (this.get('battleStarted')) {
@@ -104,13 +117,15 @@ export default Ember.Component.extend({
       }, 100);
 
       //Timer to simulate opponent clicks.
-      var opponentTimer = setInterval(() => {
-        this.opponentClick();
-      }, 250);
+      if (this.get('opponent')) {
+        var opponentTimer = setInterval(() => {
+          this.opponentClick();
+        }, 250);
+        this.set('opponentTimer', opponentTimer);
+      }
 
       this.set('timer', timer);
-      this.set('opponentTimer', opponentTimer);
-      this.set('timeLeft', 25000)
+      this.set('timeLeft', this.get('timeLimit') || 25000)
       this.set('battleStarted', true);
     }
   }

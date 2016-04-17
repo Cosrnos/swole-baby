@@ -2,20 +2,19 @@
     min-height: 100vh;
 }
 
-
 .numberBounce {
     position: absolute;
     font-size: 25pt;
     opacity: 1;
     pointer-events: none;
     font-family: 'Impact';
-    color:black;
+    color: black;
 
 }
 
 .descBounce {
     position: absolute;
-    font-size:20pt;
+    font-size: 20pt;
     opacity: 1;
     font-style: italic;
     pointer-events: none;
@@ -33,3 +32,6 @@
     white-space: normal;
 }
 
+.invisible {
+    opacity: 0;
+}

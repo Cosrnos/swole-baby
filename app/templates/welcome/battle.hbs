@@ -18,18 +18,19 @@
 {{#if stepTwo}}
     <div class="text-center">
         <h3>
-            {{#unless done}}
-                {{counterFormatted}} Seconds Left!
-            {{else}}
+            {{#if done}}
                 FINISH!
-            {{/unless}}
+            {{else}}
+                &nbsp;
+            {{/if}}
         </h3>
     </div>
 
-    {{#unless done}}
-        {{baby-battle
-        baby=model}}
-    {{/unless}}
+    {{baby-battle
+    startOnRender=true
+    baby=model
+    timeLimit=5000
+    onFinish='handle_finish'}}
 
     <div id="numberBounce" class='numberBounce'></div>
     <div id="descBounce" class='descBounce'></div>

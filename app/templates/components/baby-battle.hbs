@@ -8,14 +8,16 @@
                     {{#if wonBattle}}
                         Yo baby was swollest today, dawg.
                     {{else}}
-                        Yo baby was didn't have it today, dawgstar.  Sorry.
+                        Yo baby was didn't have it today, dawgstar. Sorry.
                     {{/if}}
                     <br>
-                    <button class="btn btn-success" {{action 'leaveBattle'}}>We're done here, brotown.</button>
+                    {{#if onLeaveBattle}}
+                        <button class="btn btn-success" {{action 'leaveBattle'}}>We're done here, brotown.</button>
+                    {{/if}}
                 {{/unless}}
 
             {{else}}
-                <h1>{{timeLeft}}</h1>
+                <h1>{{timeLeftFormatted}}</h1>
             {{/unless}}
 
         </div>
@@ -34,33 +36,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row {{if battleFinished "invisible"}}">
                 <div class="col-sm-4">
                     <div style="position: relative;" class="progress fatigue-bar">
                         <div style="position: absolute; width:100%" class="text-center">Muscle Fatigue</div>
-                        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMusclePercentage}}>
+                        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"
+                             aria-valuemin="0" aria-valuemax="100" style={{babyMusclePercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-danger attack-btn col-sm-12" {{action 'battleClick' 'muscle'}}>Muscle Attack</button>
+                    <button class="btn btn-danger attack-btn col-sm-12" {{action 'battleClick' 'muscle'}}>Muscle
+                        Attack
+                    </button>
                 </div>
                 <div class="col-sm-4">
                     <div style="position: relative;" class="progress fatigue-bar">
                         <div style="position: absolute; width:100%" class="text-center">Charisma Fatigue</div>
-                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style={{babyCharismaPercentage}}>
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
+                             aria-valuemin="0" aria-valuemax="100" style={{babyCharismaPercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-warning attack-btn col-sm-12" {{action 'battleClick' 'charisma'}}>Charisma Attack</button>
+                    <button class="btn btn-warning attack-btn col-sm-12" {{action 'battleClick' 'charisma'}}>Charisma
+                        Attack
+                    </button>
                 </div>
                 <div class="col-sm-4">
                     <div style="position: relative;" class="progress fatigue-bar">
                         <div style="position: absolute; width:100%" class="text-center">Magic Fatigue</div>
-                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{babyMagicPercentage}}>
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                             aria-valuemin="0" aria-valuemax="100" style={{babyMagicPercentage}}>
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                    <button class="btn btn-success attack-btn col-sm-12" {{action 'battleClick' 'magic'}}>Magic Attack</button>
+                    <button class="btn btn-success attack-btn col-sm-12" {{action 'battleClick' 'magic'}}>Magic Attack
+                    </button>
                 </div>
             </div>
         </div>
