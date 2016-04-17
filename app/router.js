@@ -12,6 +12,7 @@ Router.map(function () {
     this.route('activity');
     this.route('perk');
     this.route('ready');
+    this.route('battle');
   });
   this.route('battle');
   this.route('week');

@@ -1,0 +1,43 @@
+{{#if stepOne}}
+    <h3>PERK UP</h3>
+    <p>Fuck yeah that's what I'm talking about! That baby looks ready to fight! Unfortunately toddler fight clubs were
+        outlawed. Not because of the violence but because of the gambling. Anyway, your baby can still P.O.S.E</p>
+    <p>What's that?</p>
+    <p>You don't know what <strong>P.O.S.E</strong> Is?</p>
+    <p>...</p>
+    <p>Bro I'm gonna get serious with you for a sec but you're dumb as hell.</p>
+    <p>Anyway, P.O.S.E stands for Pose Over Seconds Elegantly. It's a way for swole babies to show off their
+        swoll-ness.</p>
+    <p>Use your actions as fast as you can to get the highest P.O.S.E score, but don't go too hard! The judges won't be
+        as impressed if you keep using the same action in a row.</p>
+    <p>Your baby's stats affect how many points it can get and how quickly it can use different poses again. Now that
+        we've been through the boring technical shit let's see WHAT THAT BABY CAN DO!!!!</p>
+    <button {{action 'startPose'}} class="btn btn-danger btn-block btn-lg">Start P.O.S.E-ing</button>
+{{/if}}
+
+{{#if stepTwo}}
+    <div class="text-center">
+        <h3>
+            {{#unless done}}
+                {{counterFormatted}} Seconds Left!
+            {{else}}
+                FINISH!
+            {{/unless}}
+        </h3>
+    </div>
+
+    {{#unless done}}
+        {{baby-battle
+        baby=model}}
+    {{/unless}}
+
+    <div id="numberBounce" class='numberBounce'></div>
+    <div id="descBounce" class='descBounce'></div>
+
+    {{#if done}}
+        <br/>
+        {{#link-to 'welcome.ready' class="btn btn-lg btn-primary btn-block"}}
+            Ok now what?
+        {{/link-to}}
+    {{/if}}
+{{/if}}

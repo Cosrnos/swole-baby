@@ -24,7 +24,7 @@ export default Ember.Route.extend(ClearStatsOnWillTransition, {
       var baby = this.get('controller.player.baby');
 
       // TODO: Redirect this to the battle tutorial
-      this.transitionTo('welcome.ready');
+      this.transitionTo('welcome.battle');
 
       baby.activatePerk(perk);
     }
