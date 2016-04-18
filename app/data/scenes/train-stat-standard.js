@@ -1,30 +1,59 @@
 import SceneModel from '../../models/scene';
+import Ember from 'ember';
 
-function generateStatTrain(stat) {
-  var mod = {};
-  mod[stat] = 2;
-
-  return {
-    componentName: 'scene-next',
-    title: 'Business As Usual',
-    type: 'train',
-    stat: stat,
-    statMod: mod,
-    text: `Your baby worked all week training its ${stat}`,
-    start: function () {
-      this.set('stat', stat);
-    },
-    end: function () {
-    }
-  };
-}
+var StatTrain = SceneModel.extend({
+  componentName: 'scene-next',
+  title: 'Business As Usual',
+  type: 'train',
+  stat: null,
+  statMod: Ember.computed('stat', function () {
+    var mod = {};
+    mod[this.get('stat')] = 2;
+    return mod;
+  }),
+  text: Ember.computed('player.week', 'name', function () {
+    const name = this.get('name');
+    const phrases = [
+      `Your baby worked all week training its ${name}`,
+      `PUSH IT TO THE LIMIT! Your baby's ${name} has increased!`,
+      `Your baby is getting so swole! ${name} increased`,
+      `No Pain, No gain dude you got this. ${name} has gone up.`
+    ];
+    // Trigger week recalc
+    this.get('player.week');
+    
+    return phrases[Math.floor(Math.random() * phrases.length)];
+  }),
+  start: function () {
+  },
+  end: function () {
+  }
+});
 
 export default function () {
   // Generic Stat Training
-  SceneModel.extend(generateStatTrain('str')).create({});
-  SceneModel.extend(generateStatTrain('end')).create({});
-  SceneModel.extend(generateStatTrain('cha')).create({});
-  SceneModel.extend(generateStatTrain('sel')).create({});
-  SceneModel.extend(generateStatTrain('mag')).create({});
-  SceneModel.extend(generateStatTrain('wis')).create({});
+  StatTrain.create({
+    stat: 'str',
+    name: 'Muscles'
+  });
+  StatTrain.create({
+    stat: 'end',
+    name: 'Endurance'
+  });
+  StatTrain.create({
+    stat: 'cha',
+    name: 'Charisma'
+  });
+  StatTrain.create({
+    stat: 'sel',
+    name: 'Self Esteem'
+  });
+  StatTrain.create({
+    stat: 'mag',
+    name: 'Magic Attack'
+  });
+  StatTrain.create({
+    stat: 'wis',
+    name: 'Wisdom'
+  });
 }
