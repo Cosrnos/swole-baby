@@ -1,4 +1,4 @@
-<div style="height: 75px;" class="row">
+<div style="height: 100px;" class="row">
     <div class="col-sm-12">
         <div style="text-align: center">
             {{#unless battleStarted}}
@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     {{else}}
-                        <button class="btn btn-success" {{action 'startBattle'}}>Start Battle!</button>
+                        <button class="btn btn-success btn-start-battle" {{action 'startBattle'}}>Start Battle!</button>
                     {{/if}}
 
                 {{else}}

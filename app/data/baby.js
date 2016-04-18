@@ -1,31 +1,31 @@
 import Rank from './rank';
 
 var profiles = [{
-  name: `trygvee`,
+  name: `Trygvee`,
   gender: 'male',
 }, {
-  name: `reginald`,
+  name: `Reginald`,
   gender: 'male',
 }, {
-  name: `facer`,
+  name: `Facer`,
   gender: 'male',
 }, {
-  name: `facer`,
+  name: `Facer`,
   gender: 'female',
 }, {
-  name: `shnookie`,
+  name: `Shnookie`,
   gender: 'male',
 }, {
-  name: `baller (shot caller)`,
+  name: `Baller (Shot Caller)`,
   gender: 'male',
 }, {
-  name: `noogums`,
+  name: `Noogums`,
   gender: 'male',
 }, {
-  name: `space chief`,
+  name: `Space Chief`,
   gender: 'male',
 }, {
-  name: `space chief`,
+  name: `Space Chief`,
   gender: 'female',
 }, {
   name: `yo' baby`,
@@ -34,10 +34,10 @@ var profiles = [{
   name: `yo' baby`,
   gender: 'female',
 }, {
-  name: `iggins`,
+  name: `Iggins`,
   gender: 'male',
 }, {
-  name: `iggins`,
+  name: `Iggins`,
   gender: 'female',
 }];
 
@@ -68,7 +68,7 @@ export default {
 
     return Object.assign({
       rank: rank,
-      clicksPerSec: (4 + ((rank - 10) * 0.08),
+      clicksPerSec: (4 + ((rank - 10) * 0.08)),
     }, profile, babyStats);
   },
   Rank
