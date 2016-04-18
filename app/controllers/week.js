@@ -4,7 +4,7 @@ import SceneData from '../data/scene';
 import TourneySchedule from '../services/tourney-schedule';
 
 const RSVP = Ember.RSVP;
-const MAX_WEEKS = 52;
+const MAX_WEEKS = 55;
 
 export default Ember.Controller.extend({
   screen: null,

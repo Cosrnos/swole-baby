@@ -1,7 +1,7 @@
 import SceneModel from '../../models/scene';
 import SceneData from '../scene';
 
-const TOURNEY_INTERVAL = 6;
+const TOURNEY_INTERVAL = 5;
 
 function generateTourney(rankName) {
   var rank = SceneData.Rank[rankName];
