@@ -33,7 +33,7 @@ export default function () {
   SceneModel.create({
     type: SceneData.Types.RANDOM,
     random: true,
-    chance: 100,
+    chance: 10,
     rank: SceneData.Rank.F,
     componentName: 'scene-next',
     title: 'Kung-fu baby says',
