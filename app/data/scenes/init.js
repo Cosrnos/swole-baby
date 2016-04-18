@@ -4,6 +4,7 @@ import initRankedTourneys from './tourney-ranked';
 import initScience from './science';
 import initLegDay from './leg_day';
 import initMovie from './movie';
+import initKungFuBaby from './kungfubaby';
 
 export default function () {
   initStatStandard();
@@ -12,4 +13,5 @@ export default function () {
   initScience();
   initLegDay();
   initMovie();
+  initKungFuBaby();
 }
