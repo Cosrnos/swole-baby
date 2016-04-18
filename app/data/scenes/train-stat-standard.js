@@ -21,7 +21,7 @@ var StatTrain = SceneModel.extend({
     ];
     // Trigger week recalc
     this.get('player.week');
-    
+
     return phrases[Math.floor(Math.random() * phrases.length)];
   }),
   start: function () {

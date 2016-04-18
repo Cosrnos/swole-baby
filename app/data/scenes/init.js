@@ -3,6 +3,7 @@ import initDebug from './debug';
 import initRankedTourneys from './tourney-ranked';
 import initScience from './science';
 import initLegDay from './leg_day';
+import initMovie from './movie';
 
 export default function () {
   initStatStandard();
@@ -10,4 +11,5 @@ export default function () {
   initRankedTourneys();
   initScience();
   initLegDay();
+  initMovie();
 }
