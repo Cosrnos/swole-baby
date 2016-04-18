@@ -122,7 +122,7 @@ export default Ember.Component.extend({
     }
 
     this.set('timer', timer);
-    this.set('timeLeft', this.get('timeLimit') || 25000)
+    this.set('timeLeft', this.get('timeLimit') || 25000);
     this.set('battleStarted', true);
   },
 
@@ -147,6 +147,7 @@ export default Ember.Component.extend({
     startBattle: function () {
       //Countdown to the battle:
       this.set('battleCountdownStarted', true);
+      createjs.Sound.play('baby1')
 
       var countDown = 2000;
       var battleCountDownTimer = setInterval(() => {

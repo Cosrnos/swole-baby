@@ -239,6 +239,9 @@ export default Model.extend(Perkable, {
   //Battle Stuff
   swoleness: 0,
 
+  babySounds: ['baby2','baby3','baby4','baby5','baby6','baby7','baby8'],
+  babbleSounds: ['babble1','babble2','babble3','babble4','babble5','babble6','babble7'],
+
   prepareForBattle: function () {
     this.setProperties({
       swoleness: 0,
@@ -349,8 +352,10 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.6) {
+      if (Math.random() < 0.2) {
         this.animateAttackDesc(_.sample(this.get('muscleAttackWords')));
+        //play random baby sound
+        createjs.Sound.play(_.sample(this.get('babySounds')));
       }
     }
   },
@@ -371,8 +376,10 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.6) {
+      if (Math.random() < 0.2) {
         this.animateAttackDesc(_.sample(this.get('magicAttackWords')));
+        //play random baby sound
+        createjs.Sound.play(_.sample(this.get('babySounds')));
       }
     }
   },
@@ -393,8 +400,10 @@ export default Model.extend(Perkable, {
 
     if (!this.get('isEnemy')) {
       this.animateAttackNumber(attack);
-      if (Math.random() < 0.6) {
+      if (Math.random() < 0.2) {
         this.animateAttackDesc(_.sample(this.get('charismaAttackWords')));
+        //play random baby sound
+        createjs.Sound.play(_.sample(this.get('babbleSounds')));
       }
     }
   },
