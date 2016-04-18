@@ -4,12 +4,11 @@
     {{{text}}}
     <br/><br/>
     {{#unless isSecondScreen}}
-        <div class="col-xs-6 text-center">
-            <button {{action 'onClickYes'}} class="btn btn-danger">{{safeYesText}}</button>
-        </div>
-        <div class="col-xs-6 text-center">
-            <button {{action 'onClickNo'}} class="btn btn-warning">{{safeNoText}}</button>
-        </div>
+        {{#each scene.options as |option|}}
+            <button {{action 'selectChoice' option}} class="btn btn-block {{option.btnColor}}">
+                {{option.text}}
+            </button>
+        {{/each}}
     {{else}}
         <div class="text-center">
             <button {{action 'onClickNext'}} class="btn btn-primary">Next</button>
