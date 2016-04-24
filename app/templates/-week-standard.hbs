@@ -4,36 +4,43 @@
     <p><strong>The {{tourneyHighlight.name}} tourney is this week!</strong></p>
 {{/if}}
 <p></p><br/><br/>
-<div class="col-xs-1"></div>
-<div class="col-xs-5">
-    <h3 class="border-bottom pad-top-none">Training</h3>
-    <button {{action 'enterStandardScenario' 'train' 'str'}} class="btn btn-block btn-danger">
-        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;STR
-    </button>
-    <button {{action 'enterStandardScenario' 'train' 'cha'}} class="btn btn-block btn-warning">
-        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;CHA
-    </button>
-    <button {{action 'enterStandardScenario' 'train' 'mag'}} class="btn btn-block btn-success">
-        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;MAG
-    </button>
-    {{!--
-    <button {{action 'enterStandardScenario' 'rest'}} class="btn btn-block">
-        Rest
-    </button>
-    --}}
+<div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-4">
+        <h3 class="border-bottom pad-top-none">Training</h3>
+        <button {{action 'enterStandardScenario' 'train' 'str'}} class="btn btn-block btn-danger">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;STR
+        </button>
+        <button {{action 'enterStandardScenario' 'train' 'cha'}} class="btn btn-block btn-warning">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;CHA
+        </button>
+        <button {{action 'enterStandardScenario' 'train' 'mag'}} class="btn btn-block btn-success">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;MAG
+        </button>
+        {{!--
+        <button {{action 'enterStandardScenario' 'rest'}} class="btn btn-block">
+            Rest
+        </button>
+        --}}
+    </div>
+    <div class="col-xs-2">
+        <img style="width: 110%" src="/images/baby2.png">
+    </div>
+    <div class="col-xs-4">
+        <h3 class="border-bottom pad-top-none">Special</h3>
+        {{!--
+        <button {{action 'changeScreen' 'stats'}} class="btn btn-block">
+            <span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Stats
+        </button>
+        <button {{action 'changeScreen' 'shops'}} class="btn btn-block">
+            <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Shops
+        </button>
+        --}}
+        <button {{action 'changeScreen' 'tourney-list'}} class="btn btn-block btn-warning">
+            <span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;Tournaments
+        </button>
+    </div>
+    <div class="col-xs-1"></div>
 </div>
-<div class="col-xs-5">
-    <h3 class="border-bottom pad-top-none">Special</h3>
-    {{!--
-    <button {{action 'changeScreen' 'stats'}} class="btn btn-block">
-        <span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Stats
-    </button>
-    <button {{action 'changeScreen' 'shops'}} class="btn btn-block">
-        <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Shops
-    </button>
-    --}}
-    <button {{action 'changeScreen' 'tourney-list'}} class="btn btn-block btn-warning">
-        <span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;Tournaments
-    </button>
-</div>
-<div class="col-xs-1"></div>
+
+

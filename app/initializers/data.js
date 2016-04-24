@@ -32,11 +32,8 @@ export function initialize(/* application */) {
   createjs.Sound.registerSound("assets/sounds/babbling/babble28.ogg", 'babble6');
   createjs.Sound.registerSound("assets/sounds/babbling/babble29.ogg", 'babble7');
 
-
-
-
-
-
+  //song
+  var swole_song_g = createjs.Sound.registerSound("assets/sounds/Baby_Got_Swole.ogg", 'swolesong');
 
 }
 

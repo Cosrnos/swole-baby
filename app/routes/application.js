@@ -9,6 +9,22 @@ export default Ember.Route.extend({
     controller.set('model', model);
     controller.set('createjs', createjs);
     controller.set('sound_muted', false);
+    //debugger;
+
+    //Makes sure the song plays, by trying to play the song until it is loaded and succeeds.
+    function playSong(song) {
+      function _playSong(song){
+        if (song.playState === createjs.Sound.PLAY_FAILED) {
+          Ember.run.later(function () {
+            song.play();
+            _playSong(song);
+          }, 500);
+        }
+      }
+      _playSong(song);
+    }
+
+   playSong(createjs.Sound.play('swolesong', {loop: -1, volume: .7}));
 
   },
   redirect: function () {
